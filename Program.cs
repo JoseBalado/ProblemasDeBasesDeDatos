@@ -11,7 +11,7 @@ namespace ProblemasDeBasesDeDatos
                 from concesionario in LoadData.GetConcesionarios()
                 select concesionario;
 
-            LoadData.GetConcesionarios()
+            var ex7b = LoadData.GetConcesionarios()
                 .Select(elem => elem); // Select(elm => elm); Is really not needed
 
             FormatedPrint(ex7);
@@ -22,7 +22,7 @@ namespace ProblemasDeBasesDeDatos
                 where cliente.ciudad == "Madrid"
                 select cliente;
 
-            LoadData.GetClientes()
+            var ex8b = LoadData.GetClientes()
                 .Where(elem => elem.ciudad == "Madrid");
 
             FormatedPrint(ex8);
@@ -31,11 +31,11 @@ namespace ProblemasDeBasesDeDatos
             var ex9 =
                 from marca in LoadData.GetMarcas()
                 orderby marca.nombre
-                select new { marca.nombre, marca.cifm };
+                select new { nombre = marca.nombre };
 
-            LoadData.GetMarcas()
+            var ex9b = LoadData.GetMarcas()
                 .OrderBy(marca => marca.nombre)
-                .Select(marca => marca.nombre);
+                .Select(marca => new { nombre = marca.nombre});
 
             FormatedPrint(ex9);
         }
