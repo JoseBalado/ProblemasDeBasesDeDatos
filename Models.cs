@@ -1,12 +1,12 @@
 namespace Models
 {
-    class MARCAS
+    class CLIENTES
     {
-        public int cifm { get; set; }
+        public int dni { get; set; }
         public string nombre { get; set; }
+        public string apellidos { get; set; }
         public string ciudad { get; set; }
     }
-
     class COCHES
     {
         public int cifm { get; set; }
@@ -19,18 +19,23 @@ namespace Models
         public string nombre { get; set; }
         public string ciudad { get; set; }
     }
-    class CLIENTES
-    {
-        public int dni { get; set; }
-        public string nombre { get; set; }
-        public string apellidos { get; set; }
-        public string ciudad { get; set; }
-    }
     class DISTRIBUCION
     {
         public int cifc { get; set; }
         public int codcoche { get; set; }
         public int cantidad { get; set; }
+    }
+    class MARCAS
+    {
+        public int cifm { get; set; }
+        public string nombre { get; set; }
+        public string ciudad { get; set; }
+    }
+
+    class MARCO
+    {
+        public int cifm { get; set; }
+        public int codcoche { get; set; }
     }
     class VENTAS
     {
@@ -38,10 +43,5 @@ namespace Models
         public int dni { get; set; }
         public int codcoche { get; set; }
         public string color { get; set; }
-    }
-    class MARCO
-    {
-        public int cifm { get; set; }
-        public int codcoche { get; set; }
     }
 }
