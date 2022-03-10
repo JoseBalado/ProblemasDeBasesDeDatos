@@ -4,21 +4,6 @@ namespace DataLib
 {
     class LoadData
     {
-        public static IList<MARCAS> GetMarcas()
-        {
-            IList<MARCAS> marcas = new List<MARCAS>
-            {
-                new MARCAS { cifm = 1, nombre = "SEAT", ciudad = "Madrid" },
-                new MARCAS { cifm = 2, nombre = "Renault", ciudad = "Barcelona" },
-                new MARCAS { cifm = 3, nombre = "Citroen", ciudad = "Valencia" },
-                new MARCAS { cifm = 4, nombre = "Audi", ciudad = "Madrid" },
-                new MARCAS { cifm = 5, nombre = "Opel", ciudad = "Bilbao" },
-                new MARCAS { cifm = 6, nombre = "BMW", ciudad = "Barcelona" }
-            };
-
-            return marcas;
-        } 
-
         public static IList<CLIENTES> GetClientes()
         {
             IList<CLIENTES> clientes = new List<CLIENTES>
@@ -46,6 +31,42 @@ namespace DataLib
 
             return concesionarios;
         }
+        public static IList<DISTRIBUCION> GetDistribucion()
+        {
+            IList<DISTRIBUCION> distribucion = new List<DISTRIBUCION>
+            {
+                new DISTRIBUCION { cifc = 1, codcoche = 1, cantidad = 3 },
+                new DISTRIBUCION { cifc = 1, codcoche = 5, cantidad = 7 },
+                new DISTRIBUCION { cifc = 1, codcoche = 6, cantidad = 7 },
+                new DISTRIBUCION { cifc = 2, codcoche = 6, cantidad = 5 },
+                new DISTRIBUCION { cifc = 2, codcoche = 8, cantidad = 10 },
+                new DISTRIBUCION { cifc = 2, codcoche = 9, cantidad = 10 },
+                new DISTRIBUCION { cifc = 3, codcoche = 10, cantidad = 5 },
+                new DISTRIBUCION { cifc = 3, codcoche = 11, cantidad = 3 },
+                new DISTRIBUCION { cifc = 3, codcoche = 12, cantidad = 5 },
+                new DISTRIBUCION { cifc = 4, codcoche = 13, cantidad = 10 },
+                new DISTRIBUCION { cifc = 4, codcoche = 14, cantidad = 5 },
+                new DISTRIBUCION { cifc = 5, codcoche = 15, cantidad = 10 },
+                new DISTRIBUCION { cifc = 5, codcoche = 16, cantidad = 20 },
+                new DISTRIBUCION { cifc = 5, codcoche = 17, cantidad = 8 },
+                new DISTRIBUCION { cifc = 6, codcoche = 19, cantidad = 3 },
+            };
 
+            return distribucion;
+        }
+        public static IList<MARCAS> GetMarcas()
+        {
+            IList<MARCAS> marcas = new List<MARCAS>
+            {
+                new MARCAS { cifm = 1, nombre = "SEAT", ciudad = "Madrid" },
+                new MARCAS { cifm = 2, nombre = "Renault", ciudad = "Barcelona" },
+                new MARCAS { cifm = 3, nombre = "Citroen", ciudad = "Valencia" },
+                new MARCAS { cifm = 4, nombre = "Audi", ciudad = "Madrid" },
+                new MARCAS { cifm = 5, nombre = "Opel", ciudad = "Bilbao" },
+                new MARCAS { cifm = 6, nombre = "BMW", ciudad = "Barcelona" }
+            };
+
+            return marcas;
+        }
     }
 }
