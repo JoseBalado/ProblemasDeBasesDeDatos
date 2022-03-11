@@ -1,4 +1,5 @@
 ﻿using DataLib;
+using utils;
 
 namespace ProblemasDeBasesDeDatos
 {
@@ -15,7 +16,7 @@ namespace ProblemasDeBasesDeDatos
                 .Select(elem => elem); // Select(elm => elm); Is really not needed
 
             Console.WriteLine("7. ----------------------------------------------");
-            FormatedPrint(ex7);
+            Utilities.FormatedPrint(ex7);
 
 
             // 8. Obtener todos los campos de todos los clientes de 'Madrid'
@@ -28,7 +29,7 @@ namespace ProblemasDeBasesDeDatos
                 .Where(elem => elem.ciudad == "Madrid");
 
             Console.WriteLine("8. ----------------------------------------------");
-            FormatedPrint(ex8);
+            Utilities.FormatedPrint(ex8);
 
 
             // 9. Obtener los nombres de todas las MARCAS de coches ordenadas alfabéticamente
@@ -42,7 +43,7 @@ namespace ProblemasDeBasesDeDatos
                 .Select(marca => new { nombre = marca.nombre});
 
             Console.WriteLine("9. ----------------------------------------------");
-            FormatedPrint(ex9);
+            Utilities.FormatedPrint(ex9);
 
 
             // 10. Obtener el cifc de todos los concesionarios cuya cantidad en la tabla DISTRIBUCION es mayor que 18
@@ -56,7 +57,7 @@ namespace ProblemasDeBasesDeDatos
                 .Select(distribucion => new { cifc = distribucion.cifc });
 
             Console.WriteLine("10. ----------------------------------------------");
-            FormatedPrint(ex10);
+            Utilities.FormatedPrint(ex10);
 
 
             // 11. Obtener el cifc de todos los concesionarios cuya cantidad en la tabla DISTRIBUCION está comprendida entre 10 y 18 ambos inclusive
@@ -70,31 +71,10 @@ namespace ProblemasDeBasesDeDatos
                 .Select(distribucion => new { cifc = distribucion.cifc });
 
             Console.WriteLine("11. ----------------------------------------------");
-            FormatedPrint(ex11);
+            Utilities.FormatedPrint(ex11);
         }
 
-        static void FormatedPrint(IEnumerable<object> list)
-        {
-            foreach (var property in list.First().GetType().GetProperties())
-            {
-                Console.Write($"| {property.Name,-10}");
-            }
-
-            Console.WriteLine("|");
-
-            foreach (var element in list)
-            {
-                foreach (var property in element.GetType().GetProperties())
-                {
-                    Console.Write($"| {property.GetValue(element),-10}");
-                }
-
-                Console.WriteLine("|");
-            }
-
-            Console.WriteLine();
-            Console.WriteLine();
-        }
+       // 11. Obtener el cifc de todos los concesionarios cuya cantidad en la tabla DISTRIBUCION está comprendida entre 10 y 18 ambos inclusive
+       // No hay otra forma en Linq
     }
-
 }
