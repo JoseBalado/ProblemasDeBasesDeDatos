@@ -98,9 +98,12 @@ namespace ProblemasDeBasesDeDatos
                 on marcas.ciudad equals clientes.ciudad
                 select new { marcas.cifm, clientes.dni };
 
-            var ex14b = LoadData.GetDistribucion()
-                .Where(distribucion => distribucion.cantidad > 10 || distribucion.cantidad < 5)
-                .Select(distribucion => new { cifc = distribucion.cifc });
+            var ex14b = LoadData.GetMarcas().Join(
+                        LoadData.GetClientes(),
+                        marcas => marcas.ciudad,
+                        clientes => clientes.ciudad,
+                        ( marcas, clientes) =>  new { marcas.cifm, clientes.dni }
+                );
 
             Console.WriteLine("14. ----------------------------------------------");
             Utilities.FormatedPrint(ex14);
