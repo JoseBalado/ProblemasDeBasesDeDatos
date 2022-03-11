@@ -72,9 +72,25 @@ namespace ProblemasDeBasesDeDatos
 
             Console.WriteLine("11. ----------------------------------------------");
             Utilities.FormatedPrint(ex11);
-        }
 
-       // 11. Obtener el cifc de todos los concesionarios cuya cantidad en la tabla DISTRIBUCION está comprendida entre 10 y 18 ambos inclusive
-       // No hay otra forma en Linq
+
+            // 12. Obtener el cifc de todos los concesionarios cuya cantidad en la tabla DISTRIBUCION está comprendida entre 10 y 18 ambos inclusive
+            // No hay otra forma en Linq
+
+
+            // 13. Obtener el cifc de todos los concesionarios que han adquirido más de 10 coches o menos de 5
+            var ex13 =
+                from distribucion in LoadData.GetDistribucion()
+                where distribucion.cantidad > 10 || distribucion.cantidad < 5
+                select new { cifc = distribucion.cifc };
+
+            var ex13b = LoadData.GetDistribucion()
+                .Where(distribucion => distribucion.cantidad > 10 || distribucion.cantidad < 5)
+                .Select(distribucion => new { cifc = distribucion.cifc });
+
+            Console.WriteLine("13. ----------------------------------------------");
+            Utilities.FormatedPrint(ex13);
+
+        }
     }
 }
