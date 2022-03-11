@@ -8,12 +8,12 @@ namespace DataLib
         {
             IList<CLIENTES> clientes = new List<CLIENTES>
             {
-                new CLIENTES { dni = 1, nombre = "Luis", apellidos = "Garcia", ciudad = "Madrid" },
-                new CLIENTES { dni = 2, nombre = "Antonio", apellidos = "Lopez", ciudad = "Valencia" },
-                new CLIENTES { dni = 3, nombre = "Juan", apellidos = "Martin", ciudad = "Madrid" },
-                new CLIENTES { dni = 4, nombre = "Maria", apellidos = "Garcia", ciudad = "Madrid" },
-                new CLIENTES { dni = 5, nombre = "Javier", apellidos = "Gonzalez", ciudad = "Barcelona" },
-                new CLIENTES { dni = 5, nombre = "Ana", apellidos = "Lopez", ciudad = "Barcelona" }
+                new CLIENTES { dni = 1, nombre = "Luis", apellidos = "García", ciudad = "Madrid" },
+                new CLIENTES { dni = 2, nombre = "Antonio", apellidos = "López", ciudad = "Valencia" },
+                new CLIENTES { dni = 3, nombre = "Juan", apellidos = "Martín", ciudad = "Madrid" },
+                new CLIENTES { dni = 4, nombre = "Maria", apellidos = "García", ciudad = "Madrid" },
+                new CLIENTES { dni = 5, nombre = "Javier", apellidos = "González", ciudad = "Barcelona" },
+                new CLIENTES { dni = 6, nombre = "Ana", apellidos = "López", ciudad = "Barcelona" }
             };
 
             return clientes;

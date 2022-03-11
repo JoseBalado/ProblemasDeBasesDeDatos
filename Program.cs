@@ -91,6 +91,19 @@ namespace ProblemasDeBasesDeDatos
             Console.WriteLine("13. ----------------------------------------------");
             Utilities.FormatedPrint(ex13);
 
+
+            // 14. Obtener todas las parejas de cifm de marcas y dni de clientes que sean de una misma ciudad
+            var ex14 =
+                from marcas in LoadData.GetMarcas() join clientes in LoadData.GetClientes()
+                on marcas.ciudad equals clientes.ciudad
+                select new { marcas.cifm, clientes.dni };
+
+            var ex14b = LoadData.GetDistribucion()
+                .Where(distribucion => distribucion.cantidad > 10 || distribucion.cantidad < 5)
+                .Select(distribucion => new { cifc = distribucion.cifc });
+
+            Console.WriteLine("14. ----------------------------------------------");
+            Utilities.FormatedPrint(ex14);
         }
     }
 }
