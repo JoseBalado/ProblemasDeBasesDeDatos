@@ -102,11 +102,29 @@ namespace ProblemasDeBasesDeDatos
                         LoadData.GetClientes(),
                         marcas => marcas.ciudad,
                         clientes => clientes.ciudad,
-                        ( marcas, clientes) =>  new { marcas.cifm, clientes.dni }
+                        (marcas, clientes) =>  new { marcas.cifm, clientes.dni }
                 );
 
             Console.WriteLine("14. ----------------------------------------------");
             Utilities.FormatedPrint(ex14);
+
+            // 15. Obtener todas las parejas de dni de clientes y cifm de marcas que NO sean de la misma ciudad
+            var ex15 =
+                from marcas in LoadData.GetMarcas()
+                from clientes in LoadData.GetClientes()
+                where marcas.ciudad != clientes.ciudad
+                select new { marcas.cifm, clientes.dni };
+
+            var ex15b = LoadData.GetMarcas().Join(
+                        LoadData.GetClientes(),
+                        marcas => true,
+                        clientes => true,
+                        (marcas, clientes) =>  new { marcas.cifm, mc = marcas.ciudad, clientes.dni, cc = clientes.ciudad }
+                )
+                .Where(r => r.mc != r.cc);
+
+            Console.WriteLine("15. ----------------------------------------------");
+            Utilities.FormatedPrint(ex15b);
         }
     }
 }
