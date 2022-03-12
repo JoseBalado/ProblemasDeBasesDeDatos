@@ -108,6 +108,7 @@ namespace ProblemasDeBasesDeDatos
             Console.WriteLine("14. ----------------------------------------------");
             Utilities.FormatedPrint(ex14);
 
+
             // 15. Obtener todas las parejas de dni de clientes y cifm de marcas que NO sean de la misma ciudad
             var ex15 =
                 from marcas in LoadData.GetMarcas()
@@ -125,6 +126,25 @@ namespace ProblemasDeBasesDeDatos
 
             Console.WriteLine("15. ----------------------------------------------");
             Utilities.FormatedPrint(ex15b);
+
+
+            // 16. Obtener los codcoche suministrados por algún concesionario de 'Barcelona'
+            var ex16 =
+                from concesionario in LoadData.GetConcesionarios() join distribucion in LoadData.GetDistribucion()
+                on concesionario.cifc equals distribucion.cifc
+                where concesionario.ciudad == "Barcelona"
+                select new { distribucion.codcoche };
+
+            var ex16b = LoadData.GetConcesionarios().Join(
+                        LoadData.GetDistribucion(),
+                        concesionario => concesionario.cifc,
+                        distribucion => distribucion.cifc,
+                        (concesionario, distribucion) =>  new { distribucion.codcoche, concesionario.ciudad }
+                )
+                .Where(r => r.ciudad == "Barcelona");
+
+            Console.WriteLine("16. ----------------------------------------------");
+            Utilities.FormatedPrint(ex16b);
         }
     }
 }
