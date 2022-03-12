@@ -145,6 +145,25 @@ namespace ProblemasDeBasesDeDatos
 
             Console.WriteLine("16. ----------------------------------------------");
             Utilities.FormatedPrint(ex16b);
+            
+
+            // 17. Obtener el codcoche de aquellos coches vendidos a clientes de 'Madrid'
+            var ex17 =
+                from venta in LoadData.GetVentas() join cliente in LoadData.GetClientes()
+                on venta.dni equals cliente.dni
+                where cliente.ciudad == "Madrid"
+                select new { venta.codcoche };
+
+            var ex17b = LoadData.GetVentas().Join(
+                        LoadData.GetClientes(),
+                        venta => venta.dni,
+                        cliente => cliente.dni,
+                        (venta, cliente) =>  new { venta.codcoche, cliente.ciudad }
+                )
+                .Where(r => r.ciudad == "Madrid");
+
+            Console.WriteLine("17. ----------------------------------------------");
+            Utilities.FormatedPrint(ex17);
         }
     }
 }
