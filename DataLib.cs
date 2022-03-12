@@ -68,5 +68,19 @@ namespace DataLib
 
             return marcas;
         }
+        public static IList<VENTAS> GetVentas()
+        {
+            IList<VENTAS> ventas = new List<VENTAS>
+            {
+                new VENTAS { cifc = 1, dni = 1, codcoche = 1, color = "Blanco" },
+                new VENTAS { cifc = 1, dni = 2, codcoche = 5, color = "Rojo" },
+                new VENTAS { cifc = 2, dni = 3, codcoche = 8, color = "Blanco" },
+                new VENTAS { cifc = 2, dni = 1, codcoche = 6, color = "Rojo" },
+                new VENTAS { cifc = 3, dni = 4, codcoche = 11, color = "Rojo" },
+                new VENTAS { cifc = 4, dni = 5, codcoche = 14, color = "Verde" }
+            };
+
+            return ventas;
+        }
     }
 }
