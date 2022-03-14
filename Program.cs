@@ -216,6 +216,32 @@ namespace ProblemasDeBasesDeDatos
 
             Console.WriteLine("19. ----------------------------------------------");
             Utilities.FormatedPrint(ex19);
+
+
+            // 20. Obtener los codcoche de los coches comprados en un
+            // concesionario de distinta ciudad que el cliente que lo compra
+            var ex20 =
+                from venta in LoadData.GetVentas()
+                join cliente in LoadData.GetClientes() on venta.dni equals cliente.dni
+                join concesionario in LoadData.GetConcesionarios() on venta.cifc equals concesionario.cifc
+                where cliente.ciudad != concesionario.ciudad
+                select new { venta.codcoche };
+
+            var ex20b = LoadData.GetVentas().Join(
+                        LoadData.GetClientes(),
+                        venta => venta.dni,
+                        cliente => cliente.dni,
+                        (venta, cliente) =>  new { venta.codcoche, venta.cifc, clienteCiudad = cliente.ciudad }
+                        ).Join(LoadData.GetConcesionarios(),
+                        ventaCliente => ventaCliente.cifc,
+                        concesionario => concesionario.cifc,
+                        (ventaCliente, concesionario) => new { ventaCliente.codcoche, ventaCliente.clienteCiudad, concesionario.ciudad }
+                )
+                .Where(r => r.ciudad != r.clienteCiudad)
+                .Select(r => new { r.codcoche });
+
+            Console.WriteLine("20. ----------------------------------------------");
+            Utilities.FormatedPrint(ex20);
         }
     }
 }
