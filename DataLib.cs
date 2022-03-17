@@ -96,6 +96,34 @@ namespace DataLib
 
             return marcas;
         }
+        public static IList<MARCO> GetMarco()
+        {
+            IList<MARCO> marco = new List<MARCO>
+            {
+                new MARCO { cifm = 1, codcoche = 1 },
+                new MARCO { cifm = 1, codcoche = 2 },
+                new MARCO { cifm = 1, codcoche = 3 },
+                new MARCO { cifm = 1, codcoche = 4 },
+                new MARCO { cifm = 1, codcoche = 5 },
+                new MARCO { cifm = 2, codcoche = 6 },
+                new MARCO { cifm = 2, codcoche = 7 },
+                new MARCO { cifm = 2, codcoche = 8 },
+                new MARCO { cifm = 2, codcoche = 9 },
+                new MARCO { cifm = 3, codcoche = 10 },
+                new MARCO { cifm = 3, codcoche = 11 },
+                new MARCO { cifm = 3, codcoche = 12 },
+                new MARCO { cifm = 4, codcoche = 13 },
+                new MARCO { cifm = 4, codcoche = 14 },
+                new MARCO { cifm = 5, codcoche = 15 },
+                new MARCO { cifm = 5, codcoche = 16 },
+                new MARCO { cifm = 5, codcoche = 17 },
+                new MARCO { cifm = 6, codcoche = 18 },
+                new MARCO { cifm = 6, codcoche = 19 },
+                new MARCO { cifm = 6, codcoche = 20 }
+            };
+
+            return marco;
+        }
         public static IList<VENTAS> GetVentas()
         {
             IList<VENTAS> ventas = new List<VENTAS>
