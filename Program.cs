@@ -266,6 +266,30 @@ namespace ProblemasDeBasesDeDatos
 
             Console.WriteLine("21. ----------------------------------------------");
             Utilities.FormatedPrint(ex21b);
+
+
+            // 22. Obtener todas las parejas de nombre de marcas que sean de la
+            // misma ciudad
+            // var ex21 = ??
+
+            var ex22b = LoadData.GetMarcas().Join(
+                        LoadData.GetMarcas(),
+                        marca1 => marca1.ciudad,
+                        marca2 => marca2.ciudad,
+                        (m1, m2) =>
+                        {
+                            if (string.Compare(m1.nombre, m2.nombre) > 0)
+                            {
+                                return new { marca1 = m2.nombre, marca2 = m1.nombre };
+
+                            }
+                            return new { marca1 = m1.nombre, marca2 = m2.nombre };
+                        })
+                        .Distinct()
+                        .Where(r => r.marca1 != r.marca2);
+
+            Console.WriteLine("22. ----------------------------------------------");
+            Utilities.FormatedPrint(ex22b);
         }
     }
 }

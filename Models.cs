@@ -9,9 +9,9 @@ namespace Models
     }
     class COCHES
     {
-        public int cifm { get; set; }
+        public int codcoche { get; set; }
         public string nombre { get; set; }
-        public string ciudad { get; set; }
+        public string modelo { get; set; }
     }
     class CONCESIONARIO
     {

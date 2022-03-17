@@ -18,6 +18,34 @@ namespace DataLib
 
             return clientes;
         }
+        public static IList<COCHES> GetCoches()
+        {
+            IList<COCHES> coches = new List<COCHES>
+            {
+                new COCHES { codcoche = 1, nombre = "Ibiza", modelo = "GLX" },
+                new COCHES { codcoche = 2, nombre = "Ibiza", modelo = "GLX" },
+                new COCHES { codcoche = 3, nombre = "Ibiza", modelo = "GLX" },
+                new COCHES { codcoche = 4, nombre = "Toledo", modelo = "GLX" },
+                new COCHES { codcoche = 5, nombre = "Cordoba", modelo = "GLX" },
+                new COCHES { codcoche = 6, nombre = "Megane", modelo = "GLX" },
+                new COCHES { codcoche = 7, nombre = "Megane", modelo = "GLX" },
+                new COCHES { codcoche = 8, nombre = "Laguna", modelo = "GLX" },
+                new COCHES { codcoche = 9, nombre = "Laguna", modelo = "GLX" },
+                new COCHES { codcoche = 10, nombre = "ZX", modelo = "GLX" },
+                new COCHES { codcoche = 11, nombre = "ZX", modelo = "GLX" },
+                new COCHES { codcoche = 12, nombre = "Xantia", modelo = "GLX" },
+                new COCHES { codcoche = 13, nombre = "A4", modelo = "GLX" },
+                new COCHES { codcoche = 14, nombre = "A4", modelo = "GLX" },
+                new COCHES { codcoche = 15, nombre = "Astra", modelo = "GLX" },
+                new COCHES { codcoche = 16, nombre = "Astra", modelo = "GLX" },
+                new COCHES { codcoche = 17, nombre = "Corsa", modelo = "GLX" },
+                new COCHES { codcoche = 18, nombre = "300", modelo = "GLX" },
+                new COCHES { codcoche = 19, nombre = "500", modelo = "GLX" },
+                new COCHES { codcoche = 20, nombre = "700", modelo = "GLX" }
+            };
+
+            return coches;
+        }
         public static IList<CONCESIONARIO> GetConcesionarios()
         {
             IList<CONCESIONARIO> concesionarios = new List<CONCESIONARIO>
