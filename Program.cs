@@ -1,5 +1,6 @@
 ﻿using DataLib;
 using utils;
+using System.Text.RegularExpressions;
 
 namespace ProblemasDeBasesDeDatos
 {
@@ -146,7 +147,7 @@ namespace ProblemasDeBasesDeDatos
                 .Where(r => r.ciudad == "Barcelona");
 
             Console.WriteLine("16. ----------------------------------------------");
-            Utilities.FormatedPrint(ex16b);
+            Utilities.FormatedPrint(ex16m);
             
 
             // 17. Obtener el codcoche de aquellos coches vendidos a clientes de 'Madrid'.
@@ -326,19 +327,19 @@ namespace ProblemasDeBasesDeDatos
             // por 'C'.
             // ex23?
 
-            var ex23b = LoadData.GetCoches()
+            var ex23m = LoadData.GetCoches()
                         .Where(r => r.nombre.StartsWith("C"));
 
             Console.WriteLine("23. ----------------------------------------------");
             Utilities.FormatedPrint(ex23m);
 
 
-            // 24. Obtener todos los codcoche de los coches cuyo nombre empiece no
+            // 24. Obtener todos los codcoche de los coches cuyo nombre no 
             // contiene ninguna 'A'.
             // ex24?
 
             var ex24m = LoadData.GetCoches()
-                        .Where(r => r.nombre.StartsWith("C"));
+                        .Where(r => Regex.Match(r.nombre, @"^[^Aa]*$").Success);
 
             Console.WriteLine("24. ----------------------------------------------");
             Utilities.FormatedPrint(ex24m);
