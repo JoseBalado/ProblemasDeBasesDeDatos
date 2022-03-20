@@ -274,7 +274,7 @@ namespace ProblemasDeBasesDeDatos
             // mismo y cuya marca es de 'Bilbao'.
             // En la solución parece suponer que cuando un nombre de coche es igual
             // pertecene a la mima marca.
-            // var ex21 = ??
+            // var ex22 = ??
 
             var ex22b = LoadData.GetCoches()
                         .Join
@@ -320,6 +320,19 @@ namespace ProblemasDeBasesDeDatos
                         .Where(pareja => pareja.ciudad == "Bilbao");
             Console.WriteLine("22. ----------------------------------------------");
             Utilities.FormatedPrint(ex22b);
+
+
+            // 23. Obtener todos los codcoche de los coches cuyo nombre empiece
+            // por 'C'.
+            // ex23?
+
+            var ex23b = LoadData.GetCoches()
+                        .Where(r => r.nombre.StartsWith("C"));
+
+            Console.WriteLine("23. ----------------------------------------------");
+            Utilities.FormatedPrint(ex23b);
+
+
         }
     }
 }
