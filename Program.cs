@@ -12,7 +12,7 @@ namespace ProblemasDeBasesDeDatos
                 from concesionario in LoadData.GetConcesionarios()
                 select concesionario;
 
-            var ex7b = LoadData.GetConcesionarios()
+            var ex7m = LoadData.GetConcesionarios()
                 .Select(elem => elem); // Select(elm => elm); Is really not needed.
 
             Console.WriteLine("7. ----------------------------------------------");
@@ -25,7 +25,7 @@ namespace ProblemasDeBasesDeDatos
                 where cliente.ciudad == "Madrid"
                 select cliente;
 
-            var ex8b = LoadData.GetClientes()
+            var ex8m = LoadData.GetClientes()
                 .Where(elem => elem.ciudad == "Madrid");
 
             Console.WriteLine("8. ----------------------------------------------");
@@ -38,7 +38,7 @@ namespace ProblemasDeBasesDeDatos
                 orderby marca.nombre
                 select new { nombre = marca.nombre };
 
-            var ex9b = LoadData.GetMarcas()
+            var ex9m = LoadData.GetMarcas()
                 .OrderBy(marca => marca.nombre)
                 .Select(marca => new { nombre = marca.nombre});
 
@@ -52,7 +52,7 @@ namespace ProblemasDeBasesDeDatos
                 where distribucion.cantidad > 18
                 select new { cifc = distribucion.cifc };
 
-            var ex10b = LoadData.GetDistribucion()
+            var ex10m = LoadData.GetDistribucion()
                 .Where(distribucion => distribucion.cantidad > 18)
                 .Select(distribucion => new { cifc = distribucion.cifc });
 
@@ -67,7 +67,7 @@ namespace ProblemasDeBasesDeDatos
                 where distribucion.cantidad >= 10 && distribucion.cantidad <= 18
                 select new { cifc = distribucion.cifc };
 
-            var ex11b = LoadData.GetDistribucion()
+            var ex11m = LoadData.GetDistribucion()
                 .Where(distribucion => distribucion.cantidad >= 10 && distribucion.cantidad <= 18)
                 .Select(distribucion => new { cifc = distribucion.cifc });
 
@@ -86,7 +86,7 @@ namespace ProblemasDeBasesDeDatos
                 where distribucion.cantidad > 10 || distribucion.cantidad < 5
                 select new { cifc = distribucion.cifc };
 
-            var ex13b = LoadData.GetDistribucion()
+            var ex13m = LoadData.GetDistribucion()
                 .Where(distribucion => distribucion.cantidad > 10 || distribucion.cantidad < 5)
                 .Select(distribucion => new { cifc = distribucion.cifc });
 
@@ -100,7 +100,7 @@ namespace ProblemasDeBasesDeDatos
                 on marcas.ciudad equals clientes.ciudad
                 select new { marcas.cifm, clientes.dni };
 
-            var ex14b = LoadData.GetMarcas().Join(
+            var ex14m = LoadData.GetMarcas().Join(
                         LoadData.GetClientes(),
                         marcas => marcas.ciudad,
                         clientes => clientes.ciudad,
@@ -118,7 +118,7 @@ namespace ProblemasDeBasesDeDatos
                 where marcas.ciudad != clientes.ciudad
                 select new { marcas.cifm, clientes.dni };
 
-            var ex15b = LoadData.GetMarcas().Join(
+            var ex15m = LoadData.GetMarcas().Join(
                         LoadData.GetClientes(),
                         marcas => true,
                         clientes => true,
@@ -137,7 +137,7 @@ namespace ProblemasDeBasesDeDatos
                 where concesionario.ciudad == "Barcelona"
                 select new { distribucion.codcoche };
 
-            var ex16b = LoadData.GetConcesionarios().Join(
+            var ex16m = LoadData.GetConcesionarios().Join(
                         LoadData.GetDistribucion(),
                         concesionario => concesionario.cifc,
                         distribucion => distribucion.cifc,
@@ -156,7 +156,7 @@ namespace ProblemasDeBasesDeDatos
                 where cliente.ciudad == "Madrid"
                 select new { venta.codcoche };
 
-            var ex17b = LoadData.GetVentas().Join(
+            var ex17m = LoadData.GetVentas().Join(
                         LoadData.GetClientes(),
                         venta => venta.dni,
                         cliente => cliente.dni,
@@ -177,7 +177,7 @@ namespace ProblemasDeBasesDeDatos
                 where cliente.ciudad == "Madrid" && concesionario.ciudad == "Madrid"
                 select new { venta.codcoche };
 
-            var ex18b = LoadData.GetVentas().Join(
+            var ex18m = LoadData.GetVentas().Join(
                         LoadData.GetClientes(),
                         venta => venta.dni,
                         cliente => cliente.dni,
@@ -203,7 +203,7 @@ namespace ProblemasDeBasesDeDatos
                 where cliente.ciudad == concesionario.ciudad
                 select new { venta.codcoche };
 
-            var ex19b = LoadData.GetVentas().Join(
+            var ex19m = LoadData.GetVentas().Join(
                         LoadData.GetClientes(),
                         venta => venta.dni,
                         cliente => cliente.dni,
@@ -229,7 +229,7 @@ namespace ProblemasDeBasesDeDatos
                 where cliente.ciudad != concesionario.ciudad
                 select new { venta.codcoche };
 
-            var ex20b = LoadData.GetVentas().Join(
+            var ex20m = LoadData.GetVentas().Join(
                         LoadData.GetClientes(),
                         venta => venta.dni,
                         cliente => cliente.dni,
@@ -250,7 +250,7 @@ namespace ProblemasDeBasesDeDatos
             // misma ciudad.
             // var ex21 = ??
 
-            var ex21b = LoadData.GetMarcas().Join(
+            var ex21m = LoadData.GetMarcas().Join(
                         LoadData.GetMarcas(),
                         marca1 => marca1.ciudad,
                         marca2 => marca2.ciudad,
@@ -267,7 +267,7 @@ namespace ProblemasDeBasesDeDatos
                         .Where(r => r.marca1 != r.marca2);
 
             Console.WriteLine("21. ----------------------------------------------");
-            Utilities.FormatedPrint(ex21b);
+            Utilities.FormatedPrint(ex21m);
 
 
             // 22. Obtener las parejas de modelos de coches cuyo nombre es el
@@ -276,7 +276,7 @@ namespace ProblemasDeBasesDeDatos
             // pertecene a la mima marca.
             // var ex22 = ??
 
-            var ex22b = LoadData.GetCoches()
+            var ex22m = LoadData.GetCoches()
                         .Join
                         (
                             LoadData.GetCoches(),
@@ -319,7 +319,7 @@ namespace ProblemasDeBasesDeDatos
                         )
                         .Where(pareja => pareja.ciudad == "Bilbao");
             Console.WriteLine("22. ----------------------------------------------");
-            Utilities.FormatedPrint(ex22b);
+            Utilities.FormatedPrint(ex22m);
 
 
             // 23. Obtener todos los codcoche de los coches cuyo nombre empiece
@@ -330,7 +330,18 @@ namespace ProblemasDeBasesDeDatos
                         .Where(r => r.nombre.StartsWith("C"));
 
             Console.WriteLine("23. ----------------------------------------------");
-            Utilities.FormatedPrint(ex23b);
+            Utilities.FormatedPrint(ex23m);
+
+
+            // 24. Obtener todos los codcoche de los coches cuyo nombre empiece no
+            // contiene ninguna 'A'.
+            // ex24?
+
+            var ex24m = LoadData.GetCoches()
+                        .Where(r => r.nombre.StartsWith("C"));
+
+            Console.WriteLine("24. ----------------------------------------------");
+            Utilities.FormatedPrint(ex24m);
 
 
         }
