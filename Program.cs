@@ -345,6 +345,24 @@ namespace ProblemasDeBasesDeDatos
             Utilities.FormatedPrint(ex24m);
 
 
+            // 25. Obtener el número total de nombre de marcas de coches que son
+            // de Madrid.
+            var ex25 = (from marca in LoadData.GetMarcas()
+                        where marca.ciudad == "Madrid"
+                        select marca.nombre)
+                        .Distinct()
+                        .Count();
+
+            var ex25m = LoadData.GetMarcas()
+                        .Where(r => r.ciudad == "Madrid")
+                        .Select(r => r.nombre)
+                        .Distinct()
+                        .Count();
+
+            Console.WriteLine("25. ----------------------------------------------");
+            Console.WriteLine(ex25);
+
+
         }
     }
 }
