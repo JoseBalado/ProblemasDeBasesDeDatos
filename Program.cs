@@ -360,7 +360,30 @@ namespace ProblemasDeBasesDeDatos
                         .Count();
 
             Console.WriteLine("25. ----------------------------------------------");
-            Console.WriteLine(ex25);
+            Console.WriteLine("Obtener el número total de nombre de marcas de coches que son de Madrid: {0}", ex25);
+            Console.WriteLine();
+
+
+            // 26. Obtener la media de la cantidad de coches que tienen todos los
+            // concesionarios.
+            var ex26 = (from concesinario in LoadData.GetDistribucion()
+                        group concesinario by concesinario.cifc into c
+                        select new { key = c.Key, concesionarioSum = c.Sum(c => c.cantidad ) })
+                       .Average(r => r.concesionarioSum);
+
+
+            var ex26m = LoadData.GetDistribucion()
+                        .GroupBy(r => r.cifc)
+                        .Select(g => new
+                        {
+                            Group = g,
+                            g.Key,
+                            Count = (g.Sum(group => group.cantidad ))
+                        })
+                        .Average(r => r.Count);
+
+            Console.WriteLine("26. ----------------------------------------------");
+            Console.WriteLine(ex26);
 
 
         }
