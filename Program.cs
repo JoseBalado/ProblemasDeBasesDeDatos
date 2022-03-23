@@ -421,6 +421,25 @@ namespace ProblemasDeBasesDeDatos
             Console.WriteLine();
 
 
+            // 28. Obtener el dni con numeración más baja de todos los clientes que
+            // han comprado un choche 'Blanco'.
+            var ex28 =
+                (from venta in LoadData.GetVentas()
+                where venta.color == "Blanco"
+                select venta.dni)
+                .Min();
+
+
+            var ex28em =
+                LoadData.GetVentas()
+                .Where(r => r.color == "Blanco")
+                .Min(r => r.dni);
+
+            Console.WriteLine("28. ----------------------------------------------");
+            Console.WriteLine(ex28);
+            Console.WriteLine();
+
+
         }
     }
 }
