@@ -404,24 +404,20 @@ namespace ProblemasDeBasesDeDatos
 
             // 27. Obtener el dni con numeración más alta de todos los clientes de
             // 'Madrid'.
-            // var ex27 = 
-                // from cliente in LoadData.GetClientes();
-                //where cliente.ciudad == "Madrid";
+            var ex27 =
+                (from cliente in LoadData.GetClientes()
+                where cliente.ciudad == "Madrid"
+                select cliente.dni)
+                .Max();
 
 
             var ex27em =
-                LoadData.GetDistribucion()
-                .GroupBy(r => r.cifc)
-                .Select(g => new
-                {
-                    Group = g,
-                    g.Key,
-                    Count = (g.Sum(group => group.cantidad ))
-                })
-                .Average(r => r.Count);
+                LoadData.GetClientes()
+                .Where(r => r.ciudad == "Madrid")
+                .Max(r => r.dni);
 
             Console.WriteLine("27. ----------------------------------------------");
-            Console.WriteLine(ex27em);
+            Console.WriteLine(ex27);
             Console.WriteLine();
 
 
