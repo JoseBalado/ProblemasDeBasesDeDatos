@@ -13,7 +13,8 @@ namespace ProblemasDeBasesDeDatos
                 from concesionario in LoadData.GetConcesionarios()
                 select concesionario;
 
-            var ex7em = LoadData.GetConcesionarios()
+            var ex7em = 
+                LoadData.GetConcesionarios()
                 .Select(elem => elem); // Select(elm => elm); Is really not needed.
 
             Console.WriteLine("7. ----------------------------------------------");
@@ -26,7 +27,8 @@ namespace ProblemasDeBasesDeDatos
                 where cliente.ciudad == "Madrid"
                 select cliente;
 
-            var ex8em = LoadData.GetClientes()
+            var ex8em = 
+                LoadData.GetClientes()
                 .Where(elem => elem.ciudad == "Madrid");
 
             Console.WriteLine("8. ----------------------------------------------");
@@ -39,7 +41,8 @@ namespace ProblemasDeBasesDeDatos
                 orderby marca.nombre
                 select new { nombre = marca.nombre };
 
-            var ex9em = LoadData.GetMarcas()
+            var ex9em = 
+                LoadData.GetMarcas()
                 .OrderBy(marca => marca.nombre)
                 .Select(marca => new { nombre = marca.nombre});
 
@@ -53,7 +56,8 @@ namespace ProblemasDeBasesDeDatos
                 where distribucion.cantidad > 18
                 select new { cifc = distribucion.cifc };
 
-            var ex10em = LoadData.GetDistribucion()
+            var ex10em = 
+                LoadData.GetDistribucion()
                 .Where(distribucion => distribucion.cantidad > 18)
                 .Select(distribucion => new { cifc = distribucion.cifc });
 
@@ -68,7 +72,8 @@ namespace ProblemasDeBasesDeDatos
                 where distribucion.cantidad >= 10 && distribucion.cantidad <= 18
                 select new { cifc = distribucion.cifc };
 
-            var ex11em = LoadData.GetDistribucion()
+            var ex11em = 
+                LoadData.GetDistribucion()
                 .Where(distribucion => distribucion.cantidad >= 10 && distribucion.cantidad <= 18)
                 .Select(distribucion => new { cifc = distribucion.cifc });
 
@@ -87,7 +92,8 @@ namespace ProblemasDeBasesDeDatos
                 where distribucion.cantidad > 10 || distribucion.cantidad < 5
                 select new { cifc = distribucion.cifc };
 
-            var ex13em = LoadData.GetDistribucion()
+            var ex13em = 
+                LoadData.GetDistribucion()
                 .Where(distribucion => distribucion.cantidad > 10 || distribucion.cantidad < 5)
                 .Select(distribucion => new { cifc = distribucion.cifc });
 
@@ -101,12 +107,12 @@ namespace ProblemasDeBasesDeDatos
                 on marcas.ciudad equals clientes.ciudad
                 select new { marcas.cifm, clientes.dni };
 
-            var ex14em = LoadData.GetMarcas().Join(
-                        LoadData.GetClientes(),
-                        marcas => marcas.ciudad,
-                        clientes => clientes.ciudad,
-                        (marcas, clientes) =>  new { marcas.cifm, clientes.dni }
-                );
+            var ex14em = 
+                LoadData.GetMarcas().Join(
+                LoadData.GetClientes(),
+                marcas => marcas.ciudad,
+                clientes => clientes.ciudad,
+                (marcas, clientes) =>  new { marcas.cifm, clientes.dni });
 
             Console.WriteLine("14. ----------------------------------------------");
             Utilities.FormatedPrint(ex14);
@@ -119,12 +125,12 @@ namespace ProblemasDeBasesDeDatos
                 where marcas.ciudad != clientes.ciudad
                 select new { marcas.cifm, clientes.dni };
 
-            var ex15em = LoadData.GetMarcas().Join(
-                        LoadData.GetClientes(),
-                        marcas => true,
-                        clientes => true,
-                        (marcas, clientes) =>  new { marcas.cifm, mc = marcas.ciudad, clientes.dni, cc = clientes.ciudad }
-                )
+            var ex15em = 
+                LoadData.GetMarcas().Join(
+                LoadData.GetClientes(),
+                marcas => true,
+                clientes => true,
+                (marcas, clientes) =>  new { marcas.cifm, mc = marcas.ciudad, clientes.dni, cc = clientes.ciudad })
                 .Where(r => r.mc != r.cc);
 
             Console.WriteLine("15. ----------------------------------------------");
@@ -138,12 +144,12 @@ namespace ProblemasDeBasesDeDatos
                 where concesionario.ciudad == "Barcelona"
                 select new { distribucion.codcoche };
 
-            var ex16em = LoadData.GetConcesionarios().Join(
-                        LoadData.GetDistribucion(),
-                        concesionario => concesionario.cifc,
-                        distribucion => distribucion.cifc,
-                        (concesionario, distribucion) =>  new { distribucion.codcoche, concesionario.ciudad }
-                )
+            var ex16em = 
+                LoadData.GetConcesionarios().Join(
+                LoadData.GetDistribucion(),
+                concesionario => concesionario.cifc,
+                distribucion => distribucion.cifc,
+                (concesionario, distribucion) =>  new { distribucion.codcoche, concesionario.ciudad })
                 .Where(r => r.ciudad == "Barcelona");
 
             Console.WriteLine("16. ----------------------------------------------");
@@ -157,12 +163,12 @@ namespace ProblemasDeBasesDeDatos
                 where cliente.ciudad == "Madrid"
                 select new { venta.codcoche };
 
-            var ex17em = LoadData.GetVentas().Join(
-                        LoadData.GetClientes(),
-                        venta => venta.dni,
-                        cliente => cliente.dni,
-                        (venta, cliente) =>  new { venta.codcoche, cliente.ciudad }
-                )
+            var ex17em =
+                LoadData.GetVentas().Join(
+                LoadData.GetClientes(),
+                venta => venta.dni,
+                cliente => cliente.dni,
+                (venta, cliente) =>  new { venta.codcoche, cliente.ciudad })
                 .Where(r => r.ciudad == "Madrid");
 
             Console.WriteLine("17. ----------------------------------------------");
@@ -178,16 +184,16 @@ namespace ProblemasDeBasesDeDatos
                 where cliente.ciudad == "Madrid" && concesionario.ciudad == "Madrid"
                 select new { venta.codcoche };
 
-            var ex18em = LoadData.GetVentas().Join(
-                        LoadData.GetClientes(),
-                        venta => venta.dni,
-                        cliente => cliente.dni,
-                        (venta, cliente) =>  new { venta.codcoche, venta.cifc, clienteCiudad = cliente.ciudad }
-                        ).Join(LoadData.GetConcesionarios(),
-                        ventaCliente => ventaCliente.cifc,
-                        concesionario => concesionario.cifc,
-                        (ventaCliente, concesionario) => new { ventaCliente.codcoche, ventaCliente.clienteCiudad, concesionario.ciudad }
-                )
+            var ex18em = 
+                LoadData.GetVentas().Join(
+                LoadData.GetClientes(),
+                venta => venta.dni,
+                cliente => cliente.dni,
+                (venta, cliente) =>  new { venta.codcoche, venta.cifc, clienteCiudad = cliente.ciudad }
+                ).Join(LoadData.GetConcesionarios(),
+                ventaCliente => ventaCliente.cifc,
+                concesionario => concesionario.cifc,
+                (ventaCliente, concesionario) => new { ventaCliente.codcoche, ventaCliente.clienteCiudad, concesionario.ciudad })
                 .Where(r => r.ciudad == "Madrid" && r.clienteCiudad == "Madrid")
                 .Select(r => new { r.codcoche });
 
@@ -204,16 +210,16 @@ namespace ProblemasDeBasesDeDatos
                 where cliente.ciudad == concesionario.ciudad
                 select new { venta.codcoche };
 
-            var ex19em = LoadData.GetVentas().Join(
-                        LoadData.GetClientes(),
-                        venta => venta.dni,
-                        cliente => cliente.dni,
-                        (venta, cliente) =>  new { venta.codcoche, venta.cifc, clienteCiudad = cliente.ciudad }
-                        ).Join(LoadData.GetConcesionarios(),
-                        ventaCliente => ventaCliente.cifc,
-                        concesionario => concesionario.cifc,
-                        (ventaCliente, concesionario) => new { ventaCliente.codcoche, ventaCliente.clienteCiudad, concesionario.ciudad }
-                )
+            var ex19em = 
+                LoadData.GetVentas().Join(
+                LoadData.GetClientes(),
+                venta => venta.dni,
+                cliente => cliente.dni,
+                (venta, cliente) =>  new { venta.codcoche, venta.cifc, clienteCiudad = cliente.ciudad }
+                ).Join(LoadData.GetConcesionarios(),
+                ventaCliente => ventaCliente.cifc,
+                concesionario => concesionario.cifc,
+                (ventaCliente, concesionario) => new { ventaCliente.codcoche, ventaCliente.clienteCiudad, concesionario.ciudad })
                 .Where(r => r.ciudad == r.clienteCiudad)
                 .Select(r => new { r.codcoche });
 
@@ -230,16 +236,16 @@ namespace ProblemasDeBasesDeDatos
                 where cliente.ciudad != concesionario.ciudad
                 select new { venta.codcoche };
 
-            var ex20em = LoadData.GetVentas().Join(
-                        LoadData.GetClientes(),
-                        venta => venta.dni,
-                        cliente => cliente.dni,
-                        (venta, cliente) =>  new { venta.codcoche, venta.cifc, clienteCiudad = cliente.ciudad }
-                        ).Join(LoadData.GetConcesionarios(),
-                        ventaCliente => ventaCliente.cifc,
-                        concesionario => concesionario.cifc,
-                        (ventaCliente, concesionario) => new { ventaCliente.codcoche, ventaCliente.clienteCiudad, concesionario.ciudad }
-                )
+            var ex20em =
+                LoadData.GetVentas().Join(
+                LoadData.GetClientes(),
+                venta => venta.dni,
+                cliente => cliente.dni,
+                (venta, cliente) =>  new { venta.codcoche, venta.cifc, clienteCiudad = cliente.ciudad }
+                ).Join(LoadData.GetConcesionarios(),
+                ventaCliente => ventaCliente.cifc,
+                concesionario => concesionario.cifc,
+                (ventaCliente, concesionario) => new { ventaCliente.codcoche, ventaCliente.clienteCiudad, concesionario.ciudad })
                 .Where(r => r.ciudad != r.clienteCiudad)
                 .Select(r => new { r.codcoche });
 
@@ -251,21 +257,22 @@ namespace ProblemasDeBasesDeDatos
             // misma ciudad.
             // var ex21 = ??
 
-            var ex21em = LoadData.GetMarcas().Join(
-                        LoadData.GetMarcas(),
-                        marca1 => marca1.ciudad,
-                        marca2 => marca2.ciudad,
-                        (m1, m2) =>
-                        {
-                            if (string.Compare(m1.nombre, m2.nombre) > 0)
-                            {
-                                return new { marca1 = m2.nombre, marca2 = m1.nombre };
+            var ex21em = 
+                LoadData.GetMarcas().Join(
+                LoadData.GetMarcas(),
+                marca1 => marca1.ciudad,
+                marca2 => marca2.ciudad,
+                (m1, m2) =>
+                {
+                    if (string.Compare(m1.nombre, m2.nombre) > 0)
+                    {
+                        return new { marca1 = m2.nombre, marca2 = m1.nombre };
 
-                            }
-                            return new { marca1 = m1.nombre, marca2 = m2.nombre };
-                        })
-                        .Distinct()
-                        .Where(r => r.marca1 != r.marca2);
+                    }
+                    return new { marca1 = m1.nombre, marca2 = m2.nombre };
+                })
+                .Distinct()
+                .Where(r => r.marca1 != r.marca2);
 
             Console.WriteLine("21. ----------------------------------------------");
             Utilities.FormatedPrint(ex21em);
@@ -277,48 +284,50 @@ namespace ProblemasDeBasesDeDatos
             // pertecene a la mima marca.
             // var ex22 = ??
 
-            var ex22em = LoadData.GetCoches()
-                        .Join
-                        (
-                            LoadData.GetCoches(),
-                            coche1 => coche1.nombre,
-                            coche2 => coche2.nombre,
-                            (coche1, coche2) => 
-                            new 
-                            { 
-                                coche1.nombre,
-                                modelo1 = coche1.modelo,
-                                modelo2 = coche2.modelo,
-                                codcoche1 = coche1.codcoche,
-                                codcoche2 = coche2.codcoche
-                            }
-                        )
-                        .Where(r => r.modelo1 != r.modelo2)
-                        .Select(r =>
-                        {
-                            if (string.Compare(r.modelo1, r.modelo2) > 0)
-                            {
-                                return new { nombre = r.nombre, modelo1 = r.modelo2, modelo2 = r.modelo1, codcoche1 = r.codcoche2, codcoche2 = r.codcoche1 };
+            var ex22em = 
+                LoadData.GetCoches()
+                .Join
+                (
+                    LoadData.GetCoches(),
+                    coche1 => coche1.nombre,
+                    coche2 => coche2.nombre,
+                    (coche1, coche2) => 
+                    new 
+                    { 
+                        coche1.nombre,
+                        modelo1 = coche1.modelo,
+                        modelo2 = coche2.modelo,
+                        codcoche1 = coche1.codcoche,
+                        codcoche2 = coche2.codcoche
+                    }
+                )
+                .Where(r => r.modelo1 != r.modelo2)
+                .Select(r =>
+                {
+                    if (string.Compare(r.modelo1, r.modelo2) > 0)
+                    {
+                        return new { nombre = r.nombre, modelo1 = r.modelo2, modelo2 = r.modelo1, codcoche1 = r.codcoche2, codcoche2 = r.codcoche1 };
 
-                            }
-                            return new { nombre = r.nombre, modelo1 = r.modelo1, modelo2 = r.modelo2, codcoche1 = r.codcoche1, codcoche2 = r.codcoche2 };
-                        })
-                        .Distinct()
-                        .Join
-                        (
-                            LoadData.GetMarco(),
-                            pareja => pareja.codcoche1,
-                            marco => marco.codcoche,
-                            (pareja, marco) => new { pareja.nombre, pareja.modelo1, pareja.modelo2, pareja.codcoche1, pareja.codcoche2, marco.cifm }
-                        )
-                        .Join
-                        (
-                            LoadData.GetMarcas(),
-                            pareja => pareja.cifm,
-                            marca => marca.cifm,
-                            (pareja, marca) => new { pareja.nombre, pareja.modelo1, pareja.modelo2, pareja.codcoche1, pareja.codcoche2, marca.ciudad }
-                        )
-                        .Where(pareja => pareja.ciudad == "Bilbao");
+                    }
+                    return new { nombre = r.nombre, modelo1 = r.modelo1, modelo2 = r.modelo2, codcoche1 = r.codcoche1, codcoche2 = r.codcoche2 };
+                })
+                .Distinct()
+                .Join
+                (
+                    LoadData.GetMarco(),
+                    pareja => pareja.codcoche1,
+                    marco => marco.codcoche,
+                    (pareja, marco) => new { pareja.nombre, pareja.modelo1, pareja.modelo2, pareja.codcoche1, pareja.codcoche2, marco.cifm }
+                )
+                .Join
+                (
+                    LoadData.GetMarcas(),
+                    pareja => pareja.cifm,
+                    marca => marca.cifm,
+                    (pareja, marca) => new { pareja.nombre, pareja.modelo1, pareja.modelo2, pareja.codcoche1, pareja.codcoche2, marca.ciudad }
+                )
+                .Where(pareja => pareja.ciudad == "Bilbao");
+
             Console.WriteLine("22. ----------------------------------------------");
             Utilities.FormatedPrint(ex22em);
 
@@ -327,8 +336,9 @@ namespace ProblemasDeBasesDeDatos
             // por 'C'.
             // ex23?
 
-            var ex23em = LoadData.GetCoches()
-                        .Where(r => r.nombre.StartsWith("C"));
+            var ex23em = 
+                LoadData.GetCoches()
+                .Where(r => r.nombre.StartsWith("C"));
 
             Console.WriteLine("23. ----------------------------------------------");
             Utilities.FormatedPrint(ex23em);
@@ -338,8 +348,9 @@ namespace ProblemasDeBasesDeDatos
             // contiene ninguna 'A'.
             // ex24?
 
-            var ex24em = LoadData.GetCoches()
-                        .Where(r => Regex.Match(r.nombre, @"^[^Aa]*$").Success);
+            var ex24em = 
+                LoadData.GetCoches()
+                .Where(r => Regex.Match(r.nombre, @"^[^Aa]*$").Success);
 
             Console.WriteLine("24. ----------------------------------------------");
             Utilities.FormatedPrint(ex24em);
@@ -347,17 +358,19 @@ namespace ProblemasDeBasesDeDatos
 
             // 25. Obtener el número total de nombre de marcas de coches que son
             // de Madrid.
-            var ex25 = (from marca in LoadData.GetMarcas()
-                        where marca.ciudad == "Madrid"
-                        select marca.nombre)
-                        .Distinct()
-                        .Count();
+            var ex25 =
+                (from marca in LoadData.GetMarcas()
+                where marca.ciudad == "Madrid"
+                select marca.nombre)
+                .Distinct()
+                .Count();
 
-            var ex25em = LoadData.GetMarcas()
-                        .Where(r => r.ciudad == "Madrid")
-                        .Select(r => r.nombre)
-                        .Distinct()
-                        .Count();
+            var ex25em = 
+                LoadData.GetMarcas()
+                .Where(r => r.ciudad == "Madrid")
+                .Select(r => r.nombre)
+                .Distinct()
+                .Count();
 
             Console.WriteLine("25. ----------------------------------------------");
             Console.WriteLine("Obtener el número total de nombre de marcas de coches que son de Madrid: {0}", ex25);
@@ -366,21 +379,23 @@ namespace ProblemasDeBasesDeDatos
 
             // 26. Obtener la media de la cantidad de coches que tienen todos los
             // concesionarios.
-            var ex26 = (from concesinario in LoadData.GetDistribucion()
-                        group concesinario by concesinario.cifc into c
-                        select new { key = c.Key, concesionarioSum = c.Sum(c => c.cantidad ) })
-                       .Average(r => r.concesionarioSum);
+            var ex26 = 
+                (from concesinario in LoadData.GetDistribucion()
+                group concesinario by concesinario.cifc into c
+                select new { key = c.Key, concesionarioSum = c.Sum(c => c.cantidad ) })
+                .Average(r => r.concesionarioSum);
 
 
-            var ex26em = LoadData.GetDistribucion()
-                        .GroupBy(r => r.cifc)
-                        .Select(g => new
-                        {
-                            Group = g,
-                            g.Key,
-                            Count = (g.Sum(group => group.cantidad ))
-                        })
-                        .Average(r => r.Count);
+            var ex26em = 
+                LoadData.GetDistribucion()
+                .GroupBy(r => r.cifc)
+                .Select(g => new
+                {
+                    Group = g,
+                    g.Key,
+                    Count = (g.Sum(group => group.cantidad ))
+                })
+                .Average(r => r.Count);
 
             Console.WriteLine("26. ----------------------------------------------");
             Console.WriteLine(ex26);
@@ -389,24 +404,24 @@ namespace ProblemasDeBasesDeDatos
 
             // 27. Obtener el dni con numeración más alta de todos los clientes de
             // 'Madrid'.
-            var ex27 = (from concesinario in LoadData.GetDistribucion()
-                        group concesinario by concesinario.cifc into c
-                        select new { key = c.Key, concesionarioSum = c.Sum(c => c.cantidad ) })
-                       .Average(r => r.concesionarioSum);
+            // var ex27 = 
+                // from cliente in LoadData.GetClientes();
+                //where cliente.ciudad == "Madrid";
 
 
-            var ex27em = LoadData.GetDistribucion()
-                        .GroupBy(r => r.cifc)
-                        .Select(g => new
-                        {
-                            Group = g,
-                            g.Key,
-                            Count = (g.Sum(group => group.cantidad ))
-                        })
-                        .Average(r => r.Count);
+            var ex27em =
+                LoadData.GetDistribucion()
+                .GroupBy(r => r.cifc)
+                .Select(g => new
+                {
+                    Group = g,
+                    g.Key,
+                    Count = (g.Sum(group => group.cantidad ))
+                })
+                .Average(r => r.Count);
 
             Console.WriteLine("27. ----------------------------------------------");
-            Console.WriteLine(ex27);
+            Console.WriteLine(ex27em);
             Console.WriteLine();
 
 
