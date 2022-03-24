@@ -189,8 +189,8 @@ namespace ProblemasDeBasesDeDatos
                 LoadData.GetClientes(),
                 venta => venta.dni,
                 cliente => cliente.dni,
-                (venta, cliente) =>  new { venta.codcoche, venta.cifc, clienteCiudad = cliente.ciudad }
-                ).Join(LoadData.GetConcesionarios(),
+                (venta, cliente) =>  new { venta.codcoche, venta.cifc, clienteCiudad = cliente.ciudad })
+                .Join(LoadData.GetConcesionarios(),
                 ventaCliente => ventaCliente.cifc,
                 concesionario => concesionario.cifc,
                 (ventaCliente, concesionario) => new { ventaCliente.codcoche, ventaCliente.clienteCiudad, concesionario.ciudad })
@@ -215,8 +215,8 @@ namespace ProblemasDeBasesDeDatos
                 LoadData.GetClientes(),
                 venta => venta.dni,
                 cliente => cliente.dni,
-                (venta, cliente) =>  new { venta.codcoche, venta.cifc, clienteCiudad = cliente.ciudad }
-                ).Join(LoadData.GetConcesionarios(),
+                (venta, cliente) =>  new { venta.codcoche, venta.cifc, clienteCiudad = cliente.ciudad })
+                .Join(LoadData.GetConcesionarios(),
                 ventaCliente => ventaCliente.cifc,
                 concesionario => concesionario.cifc,
                 (ventaCliente, concesionario) => new { ventaCliente.codcoche, ventaCliente.clienteCiudad, concesionario.ciudad })
@@ -241,8 +241,8 @@ namespace ProblemasDeBasesDeDatos
                 LoadData.GetClientes(),
                 venta => venta.dni,
                 cliente => cliente.dni,
-                (venta, cliente) =>  new { venta.codcoche, venta.cifc, clienteCiudad = cliente.ciudad }
-                ).Join(LoadData.GetConcesionarios(),
+                (venta, cliente) =>  new { venta.codcoche, venta.cifc, clienteCiudad = cliente.ciudad })
+                .Join(LoadData.GetConcesionarios(),
                 ventaCliente => ventaCliente.cifc,
                 concesionario => concesionario.cifc,
                 (ventaCliente, concesionario) => new { ventaCliente.codcoche, ventaCliente.clienteCiudad, concesionario.ciudad })
@@ -438,6 +438,34 @@ namespace ProblemasDeBasesDeDatos
             Console.WriteLine("28. ----------------------------------------------");
             Console.WriteLine(ex28);
             Console.WriteLine();
+
+
+            // 29. Obtener el cifc de todos los concesionarios cuyo número de
+            // coches en stock no es nulo.
+            var ex29 =
+                (from concesionario in LoadData.GetConcesionarios()
+                join distribucion in LoadData.GetDistribucion()
+                on concesionario.cifc equals distribucion.cifc
+                where distribucion.cantidad != 0
+                select new { concesionario.cifc })
+                .Distinct();
+
+
+            var ex29em =
+                LoadData.GetConcesionarios()
+                .Join
+                (
+                    LoadData.GetDistribucion(),
+                    concesionario => concesionario.cifc,
+                    distribucion => distribucion.cifc,
+                    (concesionario, distribucion) => new { concesionario.cifc, distribucion.cantidad }
+                )
+                .Where(r => r.cantidad != 0)
+                .Select(r => new { r.cifc })
+                .Distinct();
+
+            Console.WriteLine("29. ----------------------------------------------");
+            Utilities.FormatedPrint(ex29);
 
 
         }
