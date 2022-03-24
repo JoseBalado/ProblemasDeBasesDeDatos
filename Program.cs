@@ -459,6 +459,19 @@ namespace ProblemasDeBasesDeDatos
             Utilities.FormatedPrint(ex29);
 
 
+
+
+            // 30. Obtener el cifm y el nombre de las marcas de coches cuya
+            // segunda letra del nombre de la ciudad de origen sean una 'I'.
+            // var ex30?
+            var ex30em =
+                LoadData.GetMarcas()
+                .Where(r => Regex.Match(r.ciudad, @"^.i.*").Success);
+
+            Console.WriteLine("30. ----------------------------------------------");
+            Utilities.FormatedPrint(ex30em);
+
+
         }
     }
 }
