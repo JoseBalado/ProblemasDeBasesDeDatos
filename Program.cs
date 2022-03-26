@@ -459,8 +459,6 @@ namespace ProblemasDeBasesDeDatos
             Utilities.FormatedPrint(ex29);
 
 
-
-
             // 30. Obtener el cifm y el nombre de las marcas de coches cuya
             // segunda letra del nombre de la ciudad de origen sean una 'I'.
             // var ex30?
@@ -470,6 +468,44 @@ namespace ProblemasDeBasesDeDatos
 
             Console.WriteLine("30. ----------------------------------------------");
             Utilities.FormatedPrint(ex30em);
+
+
+            // 31. Obtener el dni de los clientes que han comprado algún coche a un
+            // concesionario de 'Madrid'.
+            var ex31 =
+                (from concesionario in LoadData.GetConcesionarios()
+                join venta in LoadData.GetVentas()
+                on concesionario.cifc equals venta.cifc
+                where concesionario.ciudad == "Madrid"
+                select new { venta.dni })
+                .Distinct();
+
+            var ex31em =
+                LoadData.GetConcesionarios()
+                .Where(r => r.ciudad == "Madrid")
+                .Join
+                (
+                    LoadData.GetVentas(),
+                    concecionario => concecionario.cifc,
+                    venta => venta.cifc,
+                    (concesionario, venta) => new { venta.dni }
+                )
+                .Distinct();
+
+
+            var cifcConcesionarios =
+                LoadData.GetConcesionarios()
+                .Where(r => r.ciudad == "Madrid")
+                .Select(r => r.cifc)
+                .ToList();
+
+            var ex31emb = LoadData.GetVentas()
+            .Where(r => cifcConcesionarios.Contains(r.cifc))
+            .Select( r => new { r.dni })
+            .Distinct();
+
+            Console.WriteLine("31. ----------------------------------------------");
+            Utilities.FormatedPrint(ex31);
 
 
         }
