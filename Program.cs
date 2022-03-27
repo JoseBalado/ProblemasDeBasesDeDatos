@@ -508,6 +508,30 @@ namespace ProblemasDeBasesDeDatos
             Utilities.FormatedPrint(ex31);
 
 
+            // 32. Obtener el color de los coches vendidos por el concesionario
+            // 'ACAR'
+            var ex32 =
+                from concesionario in LoadData.GetConcesionarios()
+                join venta in LoadData.GetVentas()
+                on concesionario.cifc equals venta.cifc
+                where concesionario.nombre == "ACAR"
+                select new {concesionario.cifc, concesionario.nombre, venta.color };
+
+            var ex32em =
+                LoadData.GetConcesionarios()
+                .Join
+                (
+                    LoadData.GetVentas(),
+                    concesionario => concesionario.cifc,
+                    venta => venta.cifc,
+                    (concesionario, venta) => new { concesionario.cifc, concesionario.nombre, venta.color }
+                )
+                .Where(r => r.nombre == "ACAR");
+
+            Console.WriteLine("32. ----------------------------------------------");
+            Utilities.FormatedPrint(ex32);
+
+
         }
     }
 }
