@@ -629,6 +629,26 @@ namespace ProblemasDeBasesDeDatos
             Utilities.FormatedPrint(ex34em);
 
 
+            // 35. Obtener todos los nombres de los clientes que hayan adquirido
+            // algún conche del concesionario 'DCAR'.
+            var cifc35em =
+                LoadData.GetConcesionarios()
+                .Where(r => r.nombre == "DCAR")
+                .Select(r => new { r.cifc });
+
+            var dni35em =
+                LoadData.GetVentas()
+                .Where(r => cifc35em.Contains(new { r.cifc}))
+                .Select(r => new { r.dni });
+
+            var ex35em =
+                LoadData.GetClientes()
+                .Where(r => dni35em.Contains(new { r.dni }));
+
+            Console.WriteLine("35. ----------------------------------------------");
+            Utilities.FormatedPrint(ex35em);
+
+
         }
     }
 }
