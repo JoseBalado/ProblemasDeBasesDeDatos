@@ -557,13 +557,13 @@ namespace ProblemasDeBasesDeDatos
 
 
             // 32. Obtener el color de los coches vendidos por el concesionario
-            // 'ACAR'
+            // 'ACAR'.
             var ex32 =
                 from concesionario in LoadData.GetConcesionarios()
                 join venta in LoadData.GetVentas()
                 on concesionario.cifc equals venta.cifc
                 where concesionario.nombre == "ACAR"
-                select new {concesionario.cifc, concesionario.nombre, venta.color };
+                select new { concesionario.cifc, concesionario.nombre, venta.color };
 
             var ex32em =
                 LoadData.GetConcesionarios()
@@ -576,8 +576,40 @@ namespace ProblemasDeBasesDeDatos
                 )
                 .Where(r => r.nombre == "ACAR");
 
+            // var ex32b =
+            //     from ventas in LoadData.GetVentas()
+            //     where concesionario.nombre == "ACAR"
+            //     select new { concesionario.cifc };
+
+            var cifc32em =
+                LoadData.GetConcesionarios()
+                .Where(r => r.nombre == "ACAR")
+                .Select(r => new { r.cifc })
+                .ToList();
+
+            var ex32emb = LoadData.GetVentas()
+            .Where(r => cifc32em.Contains(new { r.cifc}))
+            .Select(r => new { r.color })
+            .Distinct();
+
             Console.WriteLine("32. ----------------------------------------------");
             Utilities.FormatedPrint(ex32);
+
+
+            // 33. Obtener el codc de los coches vendidos por algún concesionario
+            // de 'Madrid'.
+            var cifc33em =
+                LoadData.GetConcesionarios()
+                .Where(r => r.ciudad == "Madrid")
+                .Select(r => new { r.cifc })
+                .ToList();
+
+            var ex33em = LoadData.GetVentas()
+            .Where(r => cifc33em.Contains(new { r.cifc}))
+            .Select(r => new { r.codcoche });
+
+            Console.WriteLine("33. ----------------------------------------------");
+            Utilities.FormatedPrint(ex33em);
 
 
         }
