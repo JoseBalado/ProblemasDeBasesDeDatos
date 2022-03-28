@@ -544,8 +544,7 @@ namespace ProblemasDeBasesDeDatos
             var cifcConcesionarios =
                 LoadData.GetConcesionarios()
                 .Where(r => r.ciudad == "Madrid")
-                .Select(r => r.cifc)
-                .ToList();
+                .Select(r => r.cifc);
 
             var ex31emb = LoadData.GetVentas()
             .Where(r => cifcConcesionarios.Contains(r.cifc))
@@ -584,8 +583,7 @@ namespace ProblemasDeBasesDeDatos
             var cifc32em =
                 LoadData.GetConcesionarios()
                 .Where(r => r.nombre == "ACAR")
-                .Select(r => new { r.cifc })
-                .ToList();
+                .Select(r => new { r.cifc });
 
             var ex32emb = LoadData.GetVentas()
             .Where(r => cifc32em.Contains(new { r.cifc}))
@@ -601,8 +599,7 @@ namespace ProblemasDeBasesDeDatos
             var cifc33em =
                 LoadData.GetConcesionarios()
                 .Where(r => r.ciudad == "Madrid")
-                .Select(r => new { r.cifc })
-                .ToList();
+                .Select(r => new { r.cifc });
 
             var ex33em = LoadData.GetVentas()
             .Where(r => cifc33em.Contains(new { r.cifc}))
@@ -610,6 +607,26 @@ namespace ProblemasDeBasesDeDatos
 
             Console.WriteLine("33. ----------------------------------------------");
             Utilities.FormatedPrint(ex33em);
+
+
+            // 34. Obtener el nombre y el modelo de los coches vendidos por algún
+            // concesionario de 'Barcelona'.
+            var cifc34em =
+                LoadData.GetConcesionarios()
+                .Where(r => r.ciudad == "Barcelona")
+                .Select(r => new { r.cifc });
+
+            var codcoche34em =
+                LoadData.GetVentas()
+                .Where(r => cifc34em.Contains(new { r.cifc}))
+                .Select(r => new { r.codcoche });
+
+            var ex34em =
+                LoadData.GetCoches()
+                .Where(r => codcoche34em.Contains(new { r.codcoche }));
+
+            Console.WriteLine("34. ----------------------------------------------");
+            Utilities.FormatedPrint(ex34em);
 
 
         }
