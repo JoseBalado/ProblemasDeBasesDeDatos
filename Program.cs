@@ -670,8 +670,6 @@ namespace ProblemasDeBasesDeDatos
             Utilities.FormatedPrint(ex36em);
 
 
-
-
             // 37. Obtener el nombre y el apellido de los clientes que han adquirido
             // un automóvil a un concesionario que posea actualmente coches
             // en stock del modelo 'GTI'.
@@ -682,7 +680,7 @@ namespace ProblemasDeBasesDeDatos
 
             var cifc37em =
                 LoadData.GetDistribucion()
-                .Where(r => codcoche36em.Contains(new { r.codcoche}))
+                .Where(r => codcoche37em.Contains(new { r.codcoche}))
                 .Select(r => new { r.cifc });
 
             var dni37em =
@@ -696,6 +694,38 @@ namespace ProblemasDeBasesDeDatos
 
             Console.WriteLine("37. ----------------------------------------------");
             Utilities.FormatedPrint(ex37em);
+
+
+            // 38. Obtener el nombre y el apellido de los clientes que han adquirido
+            // un automóvil a un concesionario de 'Madrid' que posea
+            // actualmente coches en stock del modelo 'GTI'.
+            var codcoche38em =
+                LoadData.GetCoches()
+                .Where(r => r.modelo == "GTI")
+                .Select(r => new { r.codcoche });
+
+            var cifc38em =
+                LoadData.GetDistribucion()
+                .Where(r => codcoche38em.Contains(new { r.codcoche}))
+                .Select(r => new { r.cifc });
+
+            var cifcMadrid38em =
+                LoadData.GetConcesionarios()
+                .Where(r => r.ciudad == "Madrid")
+                .Where(r => cifc38em.Contains(new { r.cifc }))
+                .Select(r => new { r.cifc });
+
+            var dni38em =
+                LoadData.GetVentas()
+                .Where(r => cifcMadrid38em.Contains(new { r.cifc}))
+                .Select(r => new { r.dni });
+
+            var clientes38em =
+                LoadData.GetClientes()
+                .Where(r => dni38em.Contains(new { r.dni }));
+
+            Console.WriteLine("38. ----------------------------------------------");
+            Utilities.FormatedPrint(clientes38em);
 
 
         }
