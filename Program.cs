@@ -649,7 +649,7 @@ namespace ProblemasDeBasesDeDatos
             Utilities.FormatedPrint(ex35em);
 
 
-            // 36. Obtener el NOMBRE y el APELLIDO de los clientes que han
+            // 36. Obtener el nombre y el apellido de los clientes que han
             // adquirido un choche modelo 'GTI' de color 'Blanco'.
             var codcoche36em =
                 LoadData.GetCoches()
@@ -668,6 +668,34 @@ namespace ProblemasDeBasesDeDatos
 
             Console.WriteLine("36. ----------------------------------------------");
             Utilities.FormatedPrint(ex36em);
+
+
+
+
+            // 37. Obtener el nombre y el apellido de los clientes que han adquirido
+            // un automóvil a un concesionario que posea actualmente coches
+            // en stock del modelo 'GTI'.
+            var codcoche37em =
+                LoadData.GetCoches()
+                .Where(r => r.modelo == "GTI")
+                .Select(r => new { r.codcoche });
+
+            var cifc37em =
+                LoadData.GetDistribucion()
+                .Where(r => codcoche36em.Contains(new { r.codcoche}))
+                .Select(r => new { r.cifc });
+
+            var dni37em =
+                LoadData.GetVentas()
+                .Where(r => cifc37em.Contains(new { r.cifc}))
+                .Select(r => new { r.dni });
+
+            var ex37em =
+                LoadData.GetClientes()
+                .Where(r => dni37em.Contains(new { r.dni }));
+
+            Console.WriteLine("37. ----------------------------------------------");
+            Utilities.FormatedPrint(ex37em);
 
 
         }
