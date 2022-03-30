@@ -728,6 +728,21 @@ namespace ProblemasDeBasesDeDatos
             Utilities.FormatedPrint(clientes38em);
 
 
+            // 39. Obtener el nombre y el apellido de los clientes cuyo dni es
+            // menor que el del cliente 'Juan Martín'.
+            var dni39em =
+                LoadData.GetClientes()
+                .Where(r => r.nombre == "Juan" && r.apellidos == "Martín")
+                .Select(r => new { r.dni });
+
+            var clientes39em =
+                LoadData.GetClientes()
+                .Where(r => dni39em.FirstOrDefault()?.dni > r.dni);
+
+            Console.WriteLine("39. ----------------------------------------------");
+            Utilities.FormatedPrint(clientes39em);
+
+
         }
     }
 }
