@@ -763,6 +763,29 @@ namespace ProblemasDeBasesDeDatos
             Utilities.FormatedPrint(clientes40em);
 
 
+            // 41. Obtener el nombre y el apellido de los clientes cuyo nombre
+            // empieza por 'A' y cuyo dni es mayor que el de los clientes que
+            // son de 'Madrid'.
+            var dniMadrid41em =
+                LoadData.GetClientes()
+                .Where(r => r.ciudad == "Madrid")
+                .Select(r => new { r.dni });
+
+            var clientes41em =
+                LoadData.GetClientes()
+                .Where(r => Regex.Match(r.nombre, @"^A").Success)
+                .Where
+                (r =>
+                    dniMadrid41em
+                    .ToList()
+                    .All(s => s.dni < r.dni)
+                );
+
+            Console.WriteLine("41. ----------------------------------------------");
+            Utilities.FormatedPrint(clientes41em);
+
+
+
             // 42. Obtener el nombre y el apellido de los clientes cuyo nombre
             // empieza por 'A' y cuyo dni es mayor que el de ¡ALGUNO! de
             // los clientes que son de 'Madrid'.
