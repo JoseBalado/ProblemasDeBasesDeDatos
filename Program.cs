@@ -839,6 +839,32 @@ namespace ProblemasDeBasesDeDatos
             Utilities.FormatedPrint(clientes43em);
 
 
+            // 44. Obtener el nombre y el apellido de los clientes que han
+            // comprado como mínimo un coche 'Blanco' y un coche
+            // 'Rojo'.
+            var dniBlanco44em =
+                LoadData.GetVentas()
+                .Where(r => r.color == "Blanco")
+                .Select(r => new { r.dni });
+
+            var dniRojo44em =
+                LoadData.GetVentas()
+                .Where(r => r.color == "Rojo")
+                .Select(r => new { r.dni });
+
+            var clientes44em =
+                LoadData.GetClientes()
+                .Where
+                (r =>
+                    dniBlanco44em.Contains(new { r.dni })
+                    &&
+                    dniRojo44em.Contains(new { r.dni })
+                );
+
+            Console.WriteLine("44. ----------------------------------------------");
+            Utilities.FormatedPrint(clientes44em);
+
+
         }
     }
 }
