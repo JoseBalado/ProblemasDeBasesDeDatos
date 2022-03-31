@@ -737,7 +737,7 @@ namespace ProblemasDeBasesDeDatos
 
             var clientes39em =
                 LoadData.GetClientes()
-                .Where(r => dniJuanMartin39em.FirstOrDefault()?.dni > r.dni);
+                .Where(r => r.dni < dniJuanMartin39em.FirstOrDefault()?.dni);
 
             Console.WriteLine("39. ----------------------------------------------");
             Utilities.FormatedPrint(clientes39em);
@@ -756,7 +756,7 @@ namespace ProblemasDeBasesDeDatos
                 (r =>
                     dniBarcelona40em
                     .ToList()
-                    .All(s => s.dni > r.dni)
+                    .All(s => r.dni < s.dni)
                 );
 
             Console.WriteLine("40. ----------------------------------------------");
@@ -778,12 +778,11 @@ namespace ProblemasDeBasesDeDatos
                 (r =>
                     dniMadrid41em
                     .ToList()
-                    .All(s => s.dni < r.dni)
+                    .All(s => r.dni > s.dni)
                 );
 
             Console.WriteLine("41. ----------------------------------------------");
             Utilities.FormatedPrint(clientes41em);
-
 
 
             // 42. Obtener el nombre y el apellido de los clientes cuyo nombre
@@ -801,11 +800,43 @@ namespace ProblemasDeBasesDeDatos
                 (r =>
                     dniMadrid42em
                     .ToList()
-                    .Any(s => s.dni < r.dni)
+                    .Any(s => r.dni > s.dni)
                 );
 
             Console.WriteLine("42. ----------------------------------------------");
             Utilities.FormatedPrint(clientes42em);
+
+
+            // 43. Obtener el nombre y el apellido de los clientes cuyo nombre
+            // empieza por 'A' y cuyo dni es mayor que el de ¡ALGUNO! de
+            // los clientes que son de 'Madrid' o menor que el de todos ls de
+            // 'Valencia'.
+            var dniMadrid43em =
+                LoadData.GetClientes()
+                .Where(r => r.ciudad == "Madrid")
+                .Select(r => new { r.dni });
+
+            var dniValencia43em =
+                LoadData.GetClientes()
+                .Where(r => r.ciudad == "Valencia")
+                .Select(r => new { r.dni });
+
+            var clientes43em =
+                LoadData.GetClientes()
+                .Where(r => Regex.Match(r.nombre, @"^A").Success)
+                .Where
+                (r =>
+                    dniMadrid43em
+                    .ToList()
+                    .Any(s => r.dni > s.dni)
+                    ||
+                    dniValencia43em
+                    .ToList()
+                    .All(s => r.dni < s.dni)
+                );
+
+            Console.WriteLine("43. ----------------------------------------------");
+            Utilities.FormatedPrint(clientes43em);
 
 
         }
