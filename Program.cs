@@ -427,7 +427,7 @@ namespace ProblemasDeBasesDeDatos
             var ex26 = 
                 (from concesinario in LoadData.GetDistribucion()
                 group concesinario by concesinario.cifc into c
-                select new { key = c.Key, concesionarioSum = c.Sum(c => c.cantidad ) })
+                select new { key = c.Key, concesionarioSum = c.Sum(g => g.cantidad ) })
                 .Average(r => r.concesionarioSum);
 
 
@@ -874,11 +874,33 @@ namespace ProblemasDeBasesDeDatos
 
             var clientes45em =
                 LoadData.GetClientes()
-                .Where
-                (r => r.ciudad == lastCiudadesConcesionario45em);
+                .Where(r => r.ciudad == lastCiudadesConcesionario45em);
 
             Console.WriteLine("45. ----------------------------------------------");
             Utilities.FormatedPrint(clientes45em);
+
+
+            // 46. Obtener la media de los automóviles que cada concesionario
+            // tiene actualmente en stock
+            var lastCiudadesConcesionario46em =
+                LoadData.GetConcesionarios()
+                .Select(r => r.ciudad)
+                .Max();
+
+            var media46em =
+                LoadData.GetDistribucion()
+                .GroupBy(r => r.cifc)
+                .Select
+                (
+                    g => new
+                    {
+                        g.Key,
+                        Count = g.Average(group => group.cantidad)
+                    }
+                );
+
+            Console.WriteLine("46. ----------------------------------------------");
+            Utilities.FormatedPrint(media46em);
 
 
         }
