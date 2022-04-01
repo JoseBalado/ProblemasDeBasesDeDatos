@@ -753,7 +753,8 @@ namespace ProblemasDeBasesDeDatos
             var clientes40em =
                 LoadData.GetClientes()
                 .Where
-                (r =>
+                (
+                    r =>
                     dniBarcelona40em
                     .ToList()
                     .All(s => r.dni < s.dni)
@@ -775,7 +776,8 @@ namespace ProblemasDeBasesDeDatos
                 LoadData.GetClientes()
                 .Where(r => Regex.Match(r.nombre, @"^A").Success)
                 .Where
-                (r =>
+                (
+                    r =>
                     dniMadrid41em
                     .ToList()
                     .All(s => r.dni > s.dni)
@@ -797,7 +799,8 @@ namespace ProblemasDeBasesDeDatos
                 LoadData.GetClientes()
                 .Where(r => Regex.Match(r.nombre, @"^A").Success)
                 .Where
-                (r =>
+                (
+                    r =>
                     dniMadrid42em
                     .ToList()
                     .Any(s => r.dni > s.dni)
@@ -825,7 +828,8 @@ namespace ProblemasDeBasesDeDatos
                 LoadData.GetClientes()
                 .Where(r => Regex.Match(r.nombre, @"^A").Success)
                 .Where
-                (r =>
+                (
+                    r =>
                     dniMadrid43em
                     .ToList()
                     .Any(s => r.dni > s.dni)
@@ -855,7 +859,8 @@ namespace ProblemasDeBasesDeDatos
             var clientes44em =
                 LoadData.GetClientes()
                 .Where
-                (r =>
+                (
+                    r =>
                     dniBlanco44em.Contains(new { r.dni })
                     &&
                     dniRojo44em.Contains(new { r.dni })
