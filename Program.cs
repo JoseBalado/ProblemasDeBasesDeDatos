@@ -865,6 +865,22 @@ namespace ProblemasDeBasesDeDatos
             Utilities.FormatedPrint(clientes44em);
 
 
+            // 45. Obtener el dni de los clientes cuya ciudad sea la última de la lista
+            // alfabética de las ciudades donde hay concesionarios.
+            var lastCiudadesConcesionario45em =
+                LoadData.GetConcesionarios()
+                .Select(r => r.ciudad)
+                .Max();
+
+            var clientes45em =
+                LoadData.GetClientes()
+                .Where
+                (r => r.ciudad == lastCiudadesConcesionario45em);
+
+            Console.WriteLine("45. ----------------------------------------------");
+            Utilities.FormatedPrint(clientes45em);
+
+
         }
     }
 }
