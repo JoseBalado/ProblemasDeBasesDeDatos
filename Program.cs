@@ -887,11 +887,6 @@ namespace ProblemasDeBasesDeDatos
 
             // 46. Obtener la media de los automóviles que cada concesionario
             // tiene actualmente en stock
-            var lastCiudadesConcesionario46em =
-                LoadData.GetConcesionarios()
-                .Select(r => r.ciudad)
-                .Max();
-
             var media46em =
                 LoadData.GetDistribucion()
                 .GroupBy(r => r.cifc)
@@ -899,7 +894,7 @@ namespace ProblemasDeBasesDeDatos
                 (
                     g => new
                     {
-                        g.Key,
+                        cifc = g.Key,
                         Count = g.Average(group => group.cantidad)
                     }
                 );
@@ -907,6 +902,31 @@ namespace ProblemasDeBasesDeDatos
             Console.WriteLine("46. ----------------------------------------------");
             Utilities.FormatedPrint(media46em);
 
+
+            // 47. Obtener el cifc del concesionario que no sea de 'Madrid' cuya
+            // media de vehículos en stock sea la mas alta de todas las medias.
+            var cifcNoMadrid =
+                LoadData.GetConcesionarios()
+                .Where(r => r.ciudad != "Madrid")
+                .Select(r => r.cifc);
+
+            var media47em =
+                LoadData.GetDistribucion()
+                .Where(r => cifcNoMadrid.Contains(r.cifc))
+                .GroupBy(r => r.cifc)
+                .Select
+                (
+                    g => new
+                    {
+                        cifc = g.Key,
+                        Count = g.Average(group => group.cantidad)
+                    }
+                )
+                .OrderByDescending(r => r.Count)
+                .FirstOrDefault();
+
+            Console.WriteLine("47. ----------------------------------------------");
+            Console.WriteLine($"cifc = {media47em.cifc}");
 
         }
     }
