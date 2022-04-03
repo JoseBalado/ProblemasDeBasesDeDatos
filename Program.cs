@@ -520,6 +520,7 @@ namespace ProblemasDeBasesDeDatos
 
             // 31. Obtener el dni de los clientes que han comprado algún coche a un
             // concesionario de 'Madrid'.
+            // Replacing 'IN' with 'Contains'.
             var ex31 =
                 (from concesionario in LoadData.GetConcesionarios()
                 join venta in LoadData.GetVentas()
@@ -557,6 +558,7 @@ namespace ProblemasDeBasesDeDatos
 
             // 32. Obtener el color de los coches vendidos por el concesionario
             // 'ACAR'.
+            // Replacing 'IN' with 'Contains'.
             var ex32 =
                 from concesionario in LoadData.GetConcesionarios()
                 join venta in LoadData.GetVentas()
@@ -596,6 +598,7 @@ namespace ProblemasDeBasesDeDatos
 
             // 33. Obtener el codc de los coches vendidos por algún concesionario
             // de 'Madrid'.
+            // Replacing 'IN' with 'Contains'.
             var cifc33em =
                 LoadData.GetConcesionarios()
                 .Where(r => r.ciudad == "Madrid")
@@ -611,6 +614,7 @@ namespace ProblemasDeBasesDeDatos
 
             // 34. Obtener el nombre y el modelo de los coches vendidos por algún
             // concesionario de 'Barcelona'.
+            // Replacing 'IN' with 'Contains'.
             var cifc34em =
                 LoadData.GetConcesionarios()
                 .Where(r => r.ciudad == "Barcelona")
@@ -631,6 +635,7 @@ namespace ProblemasDeBasesDeDatos
 
             // 35. Obtener todos los nombres de los clientes que hayan adquirido
             // algún conche del concesionario 'DCAR'.
+            // Replacing 'IN' with 'Contains'.
             var cifc35em =
                 LoadData.GetConcesionarios()
                 .Where(r => r.nombre == "DCAR")
@@ -651,6 +656,7 @@ namespace ProblemasDeBasesDeDatos
 
             // 36. Obtener el nombre y el apellido de los clientes que han
             // adquirido un choche modelo 'GTI' de color 'Blanco'.
+            // Replacing 'IN' with 'Contains'.
             var codcoche36em =
                 LoadData.GetCoches()
                 .Where(r => r.modelo == "GTI")
@@ -673,6 +679,7 @@ namespace ProblemasDeBasesDeDatos
             // 37. Obtener el nombre y el apellido de los clientes que han adquirido
             // un automóvil a un concesionario que posea actualmente coches
             // en stock del modelo 'GTI'.
+            // Replacing 'IN' with 'Contains'.
             var codcoche37em =
                 LoadData.GetCoches()
                 .Where(r => r.modelo == "GTI")
@@ -699,6 +706,7 @@ namespace ProblemasDeBasesDeDatos
             // 38. Obtener el nombre y el apellido de los clientes que han adquirido
             // un automóvil a un concesionario de 'Madrid' que posea
             // actualmente coches en stock del modelo 'GTI'.
+            // Replacing 'IN' with 'Contains'.
             var codcoche38em =
                 LoadData.GetCoches()
                 .Where(r => r.modelo == "GTI")
@@ -846,6 +854,7 @@ namespace ProblemasDeBasesDeDatos
             // 44. Obtener el nombre y el apellido de los clientes que han
             // comprado como mínimo un coche 'Blanco' y un coche
             // 'Rojo'.
+            // Replacing 'IN' with 'Contains'.
             var dniBlanco44em =
                 LoadData.GetVentas()
                 .Where(r => r.color == "Blanco")
@@ -905,6 +914,7 @@ namespace ProblemasDeBasesDeDatos
 
             // 47. Obtener el cifc del concesionario que no sea de 'Madrid' cuya
             // media de vehículos en stock sea la mas alta de todas las medias.
+            // Replacing 'IN' with 'Contains'.
             var cifcNoMadrid47em =
                 LoadData.GetConcesionarios()
                 .Where(r => r.ciudad != "Madrid")
