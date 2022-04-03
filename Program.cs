@@ -910,7 +910,7 @@ namespace ProblemasDeBasesDeDatos
                 .Where(r => r.ciudad != "Madrid")
                 .Select(r => r.cifc);
 
-            var media47em =
+            var maxMedia47em =
                 LoadData.GetDistribucion()
                 .Where(r => cifcNoMadrid.Contains(r.cifc))
                 .GroupBy(r => r.cifc)
@@ -926,7 +926,7 @@ namespace ProblemasDeBasesDeDatos
                 .FirstOrDefault();
 
             Console.WriteLine("47. ----------------------------------------------");
-            Console.WriteLine($"cifc = {media47em.cifc}");
+            Console.WriteLine($"cifc = {maxMedia47em.cifc}");
 
         }
     }
