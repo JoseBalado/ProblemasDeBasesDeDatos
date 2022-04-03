@@ -937,7 +937,24 @@ namespace ProblemasDeBasesDeDatos
 
             Console.WriteLine("47. ----------------------------------------------");
             Console.WriteLine($"cifc = {maxMedia47em.cifc}");
+            Console.WriteLine();
 
+
+            // 48. Repetir el ejercicio 33 per utilizando EXISTS en la solución.
+            // Using 'Any' in place of EXISTS.
+            // 33. Obtener el codc de los coches vendidos por algún concesionario
+            // de 'Madrid'.
+            var cifc48em =
+                LoadData.GetConcesionarios()
+                .Where(r => r.ciudad == "Madrid")
+                .Select(r => new { r.cifc });
+
+            var ex48em = LoadData.GetVentas()
+            .Where(r => cifc48em.Any(s => s.cifc == r.cifc))
+            .Select(r => new { r.codcoche });
+
+            Console.WriteLine("48. ----------------------------------------------");
+            Utilities.FormatedPrint(ex48em);
 
         }
     }
