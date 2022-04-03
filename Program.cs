@@ -905,14 +905,14 @@ namespace ProblemasDeBasesDeDatos
 
             // 47. Obtener el cifc del concesionario que no sea de 'Madrid' cuya
             // media de vehículos en stock sea la mas alta de todas las medias.
-            var cifcNoMadrid =
+            var cifcNoMadrid47em =
                 LoadData.GetConcesionarios()
                 .Where(r => r.ciudad != "Madrid")
                 .Select(r => r.cifc);
 
             var maxMedia47em =
                 LoadData.GetDistribucion()
-                .Where(r => cifcNoMadrid.Contains(r.cifc))
+                .Where(r => cifcNoMadrid47em.Contains(r.cifc))
                 .GroupBy(r => r.cifc)
                 .Select
                 (
@@ -927,6 +927,7 @@ namespace ProblemasDeBasesDeDatos
 
             Console.WriteLine("47. ----------------------------------------------");
             Console.WriteLine($"cifc = {maxMedia47em.cifc}");
+
 
         }
     }
