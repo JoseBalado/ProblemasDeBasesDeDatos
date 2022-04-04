@@ -956,6 +956,24 @@ namespace ProblemasDeBasesDeDatos
             Console.WriteLine("48. ----------------------------------------------");
             Utilities.FormatedPrint(ex48em);
 
+
+            // 49. Utilizando EXISTS obtener el dni de los clientes que hayan
+            // adquirido por lo menos alguna de los coches que ha sido vendido
+            // por el concesionario cuyo cifc es 1.
+            // Using 'Any' in place of EXISTS.
+            var ex49em = LoadData.GetVentas()
+            .Where
+            (
+                r => 
+                LoadData.GetVentas()
+                .Where(s => s.codcoche == r.codcoche) 
+                .Any(s => s.cifc == 1)
+            )
+            .Select(r => new { r.dni });
+
+            Console.WriteLine("49. ----------------------------------------------");
+            Utilities.FormatedPrint(ex49em);
+
         }
     }
 }
