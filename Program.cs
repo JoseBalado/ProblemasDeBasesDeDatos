@@ -974,6 +974,23 @@ namespace ProblemasDeBasesDeDatos
             Console.WriteLine("49. ----------------------------------------------");
             Utilities.FormatedPrint(ex49em);
 
+
+            // 50. Obtener los dni de los clientes que sólo han compardo coches al
+            // concesionario 1.
+            // Using 'All' in place of EXISTS.
+            var ex50em = LoadData.GetVentas()
+            .Where
+            (
+                r =>
+                LoadData.GetVentas()
+                .Where(s => s.dni == r.dni)
+                .All(s => s.cifc == 1)
+            )
+            .Select(r => new { r.dni });
+
+            Console.WriteLine("50. ----------------------------------------------");
+            Utilities.FormatedPrint(ex50em);
+
         }
     }
 }
