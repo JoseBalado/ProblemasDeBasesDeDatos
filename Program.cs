@@ -949,9 +949,10 @@ namespace ProblemasDeBasesDeDatos
                 .Where(r => r.ciudad == "Madrid")
                 .Select(r => new { r.cifc });
 
-            var ex48em = LoadData.GetVentas()
-            .Where(r => cifc48em.Any(s => s.cifc == r.cifc))
-            .Select(r => new { r.codcoche });
+            var ex48em =
+                LoadData.GetVentas()
+                .Where(r => cifc48em.Any(s => s.cifc == r.cifc))
+                .Select(r => new { r.codcoche });
 
             Console.WriteLine("48. ----------------------------------------------");
             Utilities.FormatedPrint(ex48em);
@@ -961,35 +962,60 @@ namespace ProblemasDeBasesDeDatos
             // adquirido por lo menos alguna de los coches que ha sido vendido
             // por el concesionario cuyo cifc es 1.
             // Using 'Any' in place of EXISTS.
-            var ex49em = LoadData.GetVentas()
-            .Where
-            (
-                r => 
+            var ex49em =
                 LoadData.GetVentas()
-                .Where(s => s.codcoche == r.codcoche) 
-                .Any(s => s.cifc == 1)
-            )
-            .Select(r => new { r.dni });
+                .Where
+                (
+                    r =>
+                    LoadData.GetVentas()
+                    .Where(s => s.codcoche == r.codcoche)
+                    .Any(s => s.cifc == 1)
+                )
+                .Select(r => new { r.dni });
 
             Console.WriteLine("49. ----------------------------------------------");
             Utilities.FormatedPrint(ex49em);
 
 
-            // 50. Obtener los dni de los clientes que sólo han compardo coches al
+            // 50. Obtener los dni de los clientes que sólo han comprado coches al
             // concesionario 1.
             // Using 'All' in place of EXISTS.
-            var ex50em = LoadData.GetVentas()
-            .Where
-            (
-                r =>
+            var ex50em =
                 LoadData.GetVentas()
-                .Where(s => s.dni == r.dni)
-                .All(s => s.cifc == 1)
-            )
-            .Select(r => new { r.dni });
+                .Where
+                (
+                    r =>
+                    LoadData.GetVentas()
+                    .Where(s => s.dni == r.dni)
+                    .All(s => s.cifc == 1)
+                )
+                .Select(r => new { r.dni });
 
             Console.WriteLine("50. ----------------------------------------------");
             Utilities.FormatedPrint(ex50em);
+
+
+            // 51. Obtener los dni de los clientes que no han comprado
+            // ningún coche 'Rojo' a ningún concesionario de 'Madrid'.
+            // Using 'All' in place of NOT EXISTS.
+            var cifc51em =
+                LoadData.GetConcesionarios()
+                .Where(r => r.ciudad == "Madrid")
+                .Select(r => r.cifc);
+
+            var ex51em =
+                LoadData.GetVentas()
+                .Where
+                (
+                    r =>
+                    LoadData.GetVentas()
+                    .Where(s => s.dni == r.dni)
+                    .All(r => r.color != "Rojo" && !cifc51em.Contains(r.cifc))
+                )
+                .Select(r => new { r.dni });
+
+            Console.WriteLine("51. ----------------------------------------------");
+            Utilities.FormatedPrint(ex51em);
 
         }
     }
