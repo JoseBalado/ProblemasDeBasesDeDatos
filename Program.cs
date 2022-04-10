@@ -959,7 +959,7 @@ namespace ProblemasDeBasesDeDatos
 
 
             // 49. Utilizando EXISTS obtener el dni de los clientes que hayan
-            // adquirido por lo menos alguna de los coches que ha sido vendido
+            // adquirido por lo menos alguno de los coches que ha sido vendido
             // por el concesionario cuyo cifc es 1.
             // Using 'Any' in place of EXISTS.
             var ex49em =
@@ -1016,6 +1016,28 @@ namespace ProblemasDeBasesDeDatos
 
             Console.WriteLine("51. ----------------------------------------------");
             Utilities.FormatedPrint(ex51em);
+
+            // 52. Obtener el nombre de los clientes que sólo han comprado en el
+            // concesionario de cifc 1.
+            // Using 'All' in place of NOT EXISTS.
+            var dni52em =
+                LoadData.GetVentas()
+                .Where
+                (
+                    r =>
+                    LoadData.GetVentas()
+                    .Where(s => s.dni == r.dni)
+                    .All(r => r.cifc == 1)
+                )
+                .Select(r => new { r.dni })
+                .ToList();
+
+            var ex52em =
+                LoadData.GetClientes()
+                .Where(r => dni52em.Contains(new { r.dni }));
+
+            Console.WriteLine("52. ----------------------------------------------");
+            Utilities.FormatedPrint(ex52em);
 
         }
     }
