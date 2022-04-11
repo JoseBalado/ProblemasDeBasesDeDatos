@@ -1017,6 +1017,7 @@ namespace ProblemasDeBasesDeDatos
             Console.WriteLine("51. ----------------------------------------------");
             Utilities.FormatedPrint(ex51em);
 
+
             // 52. Obtener el nombre de los clientes que sólo han comprado en el
             // concesionario de cifc 1.
             // Using 'All' in place of NOT EXISTS.
@@ -1038,6 +1039,30 @@ namespace ProblemasDeBasesDeDatos
 
             Console.WriteLine("52. ----------------------------------------------");
             Utilities.FormatedPrint(ex52em);
+
+
+            // 53. Obtener el codcoche de aquellos automóviles que han sido
+            // comprados por todos los clientes de 'Madrid'.
+            // Using 'All' in place of NOT EXISTS.
+            // The problem doesn't make sense.
+            var dniMadrid53em =
+                LoadData.GetClientes()
+                .Where(r => r.ciudad == "Madrid")
+                .Select(r => r.dni)
+                .ToList();
+
+            var ex53em =
+                LoadData.GetVentas()
+                .Where
+                (
+                    r =>
+                    LoadData.GetVentas()
+                    .Where(s => s.codcoche == r.codcoche)
+                    .All(r => dniMadrid53em.All(s => s == r.dni))
+                );
+
+            Console.WriteLine("53. ----------------------------------------------");
+            Utilities.FormatedPrint(ex53em);
 
         }
     }
