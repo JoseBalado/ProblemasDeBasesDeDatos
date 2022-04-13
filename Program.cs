@@ -969,7 +969,7 @@ namespace ProblemasDeBasesDeDatos
                     r =>
                     LoadData.GetVentas()
                     .Where(s => s.codcoche == r.codcoche)
-                    .Any(s => s.cifc == 1)
+                    .Any(t => t.cifc == 1)
                 )
                 .Select(r => new { r.dni });
 
@@ -1063,6 +1063,38 @@ namespace ProblemasDeBasesDeDatos
 
             Console.WriteLine("53. ----------------------------------------------");
             Utilities.FormatedPrint(ex53em);
+
+
+            // 54. Obtener el codcoche de aquellos automóviles de color "Rojo" y
+            // de modelo "GTI" que han sido comprados por todos los clientes
+            // cuyo apellido comienza por "G".
+            // Using 'Any' in place of NOT EXISTS.
+            // The problem doesn't make sense.
+            var name54em =
+                LoadData.GetClientes()
+                .Where(r => Regex.Match(r.apellidos, @"^G").Success)
+                .Select(r => r.dni)
+                .ToList();
+
+            var GTI54em =
+                LoadData.GetCoches()
+                .Where(r => r.modelo == "GTI")
+                .Select(r => r.codcoche)
+                .ToList();
+
+            var ex54em =
+                LoadData.GetVentas()
+                .Where
+                (
+                    r =>
+                    LoadData.GetVentas()
+                    .Where(s => s.codcoche == r.codcoche)
+                    .Where(r => r.color == "Rojo" && GTI54em.Contains(r.codcoche))
+                    .Any(r => name54em.Contains(r.dni))
+                );
+
+            Console.WriteLine("54. ----------------------------------------------");
+            Utilities.FormatedPrint(ex54em);
 
         }
     }
