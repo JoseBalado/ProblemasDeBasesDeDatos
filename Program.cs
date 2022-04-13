@@ -1096,6 +1096,30 @@ namespace ProblemasDeBasesDeDatos
             Console.WriteLine("54. ----------------------------------------------");
             Utilities.FormatedPrint(ex54em);
 
+
+            // 55. Obtener el dni de los clientes que han adquirido por lo menos los
+            // mismos automóviles quel el cliente "Luis García".
+            // Using 'Any' in place of NOT EXISTS.
+            // The problem doesn't make sense.
+            var luisGarcia55em =
+                LoadData.GetClientes()
+                .Where(r => r.nombre == "Luis" && r.apellidos == "García")
+                .Select(r => r.dni)
+                .ToList();
+
+            var ex55em =
+                LoadData.GetVentas()
+                .Where
+                (
+                    r =>
+                    LoadData.GetVentas()
+                    .Where(s => s.codcoche == r.codcoche)
+                    .Any(r => luisGarcia55em.Contains(r.dni))
+                );
+
+            Console.WriteLine("55. ----------------------------------------------");
+            Utilities.FormatedPrint(ex55em);
+
         }
     }
 }
