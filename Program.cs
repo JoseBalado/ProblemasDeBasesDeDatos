@@ -1120,6 +1120,10 @@ namespace ProblemasDeBasesDeDatos
             Console.WriteLine("55. ----------------------------------------------");
             Utilities.FormatedPrint(ex55em);
 
+
+            // 56. Doesn't make sense.
+            // 57. Convertir la siguiente proposición de SQL a su equivalente en
+            // Castellano (the query is already given).
         }
     }
 }
